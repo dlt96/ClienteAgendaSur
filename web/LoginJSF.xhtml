@@ -8,8 +8,10 @@
     <h:body>
         <h:form>
             Email
-            <h:inputText value = "" alt="Email" /> 
-            <h:commandButton action="#" value="Submit"></h:commandButton>
+            <h:inputText value = "#{UserBean.email}" alt="Email" /> 
+            Password
+            <h:inputSecret  value = "#{UserBean.password}" alt="Password" />
+            <h:commandButton action="#{UserBean.doLogin()}" value="Submit"></h:commandButton>
         </h:form>
     </h:body>
 </html>

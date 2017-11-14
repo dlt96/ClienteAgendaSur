@@ -1,0 +1,394 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://services.agendasur/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://services.agendasur/">
+
+<xs:element name="comentario" type="tns:comentario"/>
+
+<xs:element name="countComentario" type="tns:countComentario"/>
+
+<xs:element name="countComentarioResponse" type="tns:countComentarioResponse"/>
+
+<xs:element name="countEvento" type="tns:countEvento"/>
+
+<xs:element name="countEventoResponse" type="tns:countEventoResponse"/>
+
+<xs:element name="countTag" type="tns:countTag"/>
+
+<xs:element name="countTagResponse" type="tns:countTagResponse"/>
+
+<xs:element name="countUsuario" type="tns:countUsuario"/>
+
+<xs:element name="countUsuarioResponse" type="tns:countUsuarioResponse"/>
+
+<xs:element name="createComentario" type="tns:createComentario"/>
+
+<xs:element name="createEvento" type="tns:createEvento"/>
+
+<xs:element name="createTag" type="tns:createTag"/>
+
+<xs:element name="createUsuario" type="tns:createUsuario"/>
+
+<xs:element name="editComentario" type="tns:editComentario"/>
+
+<xs:element name="editEvento" type="tns:editEvento"/>
+
+<xs:element name="editTag" type="tns:editTag"/>
+
+<xs:element name="editUsuario" type="tns:editUsuario"/>
+
+<xs:element name="evento" type="tns:evento"/>
+
+<xs:element name="findAllComentario" type="tns:findAllComentario"/>
+
+<xs:element name="findAllComentarioResponse" type="tns:findAllComentarioResponse"/>
+
+<xs:element name="findAllEvento" type="tns:findAllEvento"/>
+
+<xs:element name="findAllEventoResponse" type="tns:findAllEventoResponse"/>
+
+<xs:element name="findAllTag" type="tns:findAllTag"/>
+
+<xs:element name="findAllTagResponse" type="tns:findAllTagResponse"/>
+
+<xs:element name="findAllUsuario" type="tns:findAllUsuario"/>
+
+<xs:element name="findAllUsuarioResponse" type="tns:findAllUsuarioResponse"/>
+
+<xs:element name="findComentario" type="tns:findComentario"/>
+
+<xs:element name="findComentarioResponse" type="tns:findComentarioResponse"/>
+
+<xs:element name="findEvento" type="tns:findEvento"/>
+
+<xs:element name="findEventoResponse" type="tns:findEventoResponse"/>
+
+<xs:element name="findRangeComentario" type="tns:findRangeComentario"/>
+
+<xs:element name="findRangeComentarioResponse" type="tns:findRangeComentarioResponse"/>
+
+<xs:element name="findRangeEvento" type="tns:findRangeEvento"/>
+
+<xs:element name="findRangeEventoResponse" type="tns:findRangeEventoResponse"/>
+
+<xs:element name="findRangeTag" type="tns:findRangeTag"/>
+
+<xs:element name="findRangeTagResponse" type="tns:findRangeTagResponse"/>
+
+<xs:element name="findRangeUsuario" type="tns:findRangeUsuario"/>
+
+<xs:element name="findRangeUsuarioResponse" type="tns:findRangeUsuarioResponse"/>
+
+<xs:element name="findTag" type="tns:findTag"/>
+
+<xs:element name="findTagResponse" type="tns:findTagResponse"/>
+
+<xs:element name="findUsuario" type="tns:findUsuario"/>
+
+<xs:element name="findUsuarioResponse" type="tns:findUsuarioResponse"/>
+
+<xs:element name="removeComentario" type="tns:removeComentario"/>
+
+<xs:element name="removeEvento" type="tns:removeEvento"/>
+
+<xs:element name="removeTag" type="tns:removeTag"/>
+
+<xs:element name="removeUsuario" type="tns:removeUsuario"/>
+
+<xs:element name="tag" type="tns:tag"/>
+
+<xs:element name="usuario" type="tns:usuario"/>
+
+<xs:complexType name="findAllTag">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="findAllTagResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tag" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tag">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="editComentario">
+<xs:sequence>
+<xs:element name="entity" type="tns:comentario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="comentario">
+<xs:sequence>
+<xs:element name="comentario" type="xs:string" minOccurs="0"/>
+<xs:element name="comentarioPK" type="tns:comentarioPK" minOccurs="0"/>
+<xs:element name="evento" type="tns:evento" minOccurs="0"/>
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="usuario" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="comentarioPK">
+<xs:sequence>
+<xs:element name="eventoId" type="xs:int"/>
+<xs:element name="usuarioEmail" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="evento">
+<xs:sequence>
+<xs:element name="creador" type="tns:usuario" minOccurs="0"/>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+<xs:element name="direccion" type="xs:string" minOccurs="0"/>
+<xs:element name="fechafin" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="fechainicio" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="latitud" type="xs:float"/>
+<xs:element name="longitud" type="xs:float"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="validado" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="usuario">
+<xs:sequence>
+<xs:element name="apellidos" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="tipousuario" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="editTag">
+<xs:sequence>
+<xs:element name="entity" type="tns:tag" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findTag">
+<xs:sequence>
+<xs:element name="id" type="xs:anyType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findTagResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tag" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="removeComentario">
+<xs:sequence>
+<xs:element name="entity" type="tns:comentario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createEvento">
+<xs:sequence>
+<xs:element name="entity" type="tns:evento" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="editUsuario">
+<xs:sequence>
+<xs:element name="entity" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAllComentario">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="findAllComentarioResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:comentario" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createTag">
+<xs:sequence>
+<xs:element name="entity" type="tns:tag" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countEvento">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="countEventoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeEvento">
+<xs:sequence>
+<xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeEventoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:evento" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findEvento">
+<xs:sequence>
+<xs:element name="id" type="xs:anyType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findEventoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:evento" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="removeUsuario">
+<xs:sequence>
+<xs:element name="entity" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findComentario">
+<xs:sequence>
+<xs:element name="id" type="xs:anyType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findComentarioResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:comentario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findUsuario">
+<xs:sequence>
+<xs:element name="id" type="xs:anyType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countTag">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="countTagResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="removeTag">
+<xs:sequence>
+<xs:element name="entity" type="tns:tag" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeComentario">
+<xs:sequence>
+<xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeComentarioResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:comentario" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createComentario">
+<xs:sequence>
+<xs:element name="entity" type="tns:comentario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createUsuario">
+<xs:sequence>
+<xs:element name="entity" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAllEvento">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="findAllEventoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:evento" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="editEvento">
+<xs:sequence>
+<xs:element name="entity" type="tns:evento" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countComentario">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="countComentarioResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="removeEvento">
+<xs:sequence>
+<xs:element name="entity" type="tns:evento" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeUsuario">
+<xs:sequence>
+<xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:usuario" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countUsuario">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="countUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAllUsuario">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="findAllUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:usuario" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeTag">
+<xs:sequence>
+<xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeTagResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tag" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
