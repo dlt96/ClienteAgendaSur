@@ -41,6 +41,18 @@
                     </f:facet>
                     #{evento.direccion}
                 </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Editar
+                    </f:facet>
+                    <h:commandButton value="Editar" action="#{deleteAndModifyEvent.doEditar(evento)}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Borrar
+                    </f:facet>
+                    <h:commandButton value="Borrar" action="#{deleteAndModifyEvent.doEliminar(evento)}" />
+                </h:column>
             </h:dataTable>
         </h:form>
     </h:body>
