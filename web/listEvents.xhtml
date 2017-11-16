@@ -2,58 +2,37 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title>Agenda Sur</title>
     </h:head>
     <h:body>
         <h:form>
-            <h:dataTable value="#{listadoEventos.listaEventos}" var="evento">
-                <h:column>
-                    <f:facet name="header">
-                        Nombre
-                    </f:facet>
-                    #{evento.nombre} 
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Descripcion
-                    </f:facet>
-                    #{evento.descripcion}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Fecha de inicio
-                    </f:facet>
-                    <h:outputText value="#{evento.fechainicio.toString().substring(0,10)} #{evento.fechainicio.toString().substring(11,19)}">
-                    </h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Fecha de fin
-                    </f:facet>
-                    <h:outputText value="#{evento.fechafin.toString().substring(0,10)} #{evento.fechafin.toString().substring(11,19)}">
-                    </h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Ubicación
-                    </f:facet>
-                    #{evento.direccion}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Editar
-                    </f:facet>
-                    <h:commandButton value="Editar" action="#{deleteAndModifyEvent.doEditar(evento)}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Borrar
-                    </f:facet>
-                    <h:commandButton value="Borrar" action="#{deleteAndModifyEvent.doEliminar(evento)}" />
-                </h:column>
-            </h:dataTable>
+            <b:dataTable value="#{listadoEventos.listaEventos}"
+                         var="evento"
+                         page-length="5"
+                         page-length-menu="5,10,20">
+                <f:facet name="header">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Fecha inicio</th>
+                        <th>Fecha fin</th>
+                        <th>Ubicacion</th>
+                        <th>Acciones</th>
+                    </tr>
+                </f:facet>
+                <b:dataTableColumn value="#{evento.nombre}"/> 
+                <b:dataTableColumn value="#{evento.descripcion}"/> 
+                <b:dataTableColumn value="#{evento.fechainicio.toString().substring(0,10)} #{evento.fechainicio.toString().substring(11,19)}"/> 
+                <b:dataTableColumn value="#{evento.fechafin.toString().substring(0,10)} #{evento.fechafin.toString().substring(11,19)}"/> 
+                <b:dataTableColumn value="#{evento.direccion}"/> 
+                <b:dataTableColumn>
+                <b:commandButton value="Editar" look="warning" action="#" />
+                <b:commandButton value="Borrar" look="danger" action="#{listadoEventos.doBorrar(evento)}" />
+                </b:dataTableColumn> 
+            </b:dataTable>
         </h:form>
     </h:body>
 </html>
