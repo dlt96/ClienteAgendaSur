@@ -22,14 +22,14 @@ public class UserBean implements Serializable {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AgendaSur-war/agendaSurService.wsdl")
     private AgendaSurService_Service service;
-    
+
     private String email;
     private String password;
     private Usuario usuario;
-    
+
     public UserBean() {
     }
-    
+
     public String getPassword() {
         return password;
     }
@@ -53,19 +53,19 @@ public class UserBean implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    public String doLogin(){
-            if(email!=null){
-                usuario = findUsuario(email);
-            }
-            
-            if(usuario!=null&&usuario.getPassword().equals(password)){
-               return "listEvents";
-            }else{
-                return null;  
-            }
+
+    public String doLogin() {
+        if (email != null) {
+            usuario = findUsuario(email);
+        }
+
+        if (usuario != null && usuario.getPassword().equals(password)) {
+            return "listEvents";
+        } else {
+            return null;
+        }
     }
-    
+
     private java.util.List<client.Usuario> findAllUsuario() {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findAllUsuario();

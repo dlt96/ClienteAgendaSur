@@ -7,7 +7,6 @@ package agendasur.bean;
 
 import client.AgendaSurService_Service;
 import client.Evento;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -22,7 +21,7 @@ import javax.xml.ws.WebServiceRef;
 @RequestScoped
 public class listadoEventos {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AgendaSur-war/agendaSurService.wsdl")
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AgendaSur-war/AgendaSurService.wsdl")
     private AgendaSurService_Service service;
 
     private List<Evento> listaEventos;
@@ -45,12 +44,26 @@ public class listadoEventos {
     public List<Evento> getListaEventos() {
         return listaEventos;
     }
+   
     
+    public String doBorrar(Evento evento){
+            removeEvento(evento);
+            init();
+        return null;
+    }
+
     private java.util.List<client.Evento> findAllEvento() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findAllEvento();
+    }
+
+    private void removeEvento(client.Evento entity) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        port.removeEvento(entity);
     }
     
 }
