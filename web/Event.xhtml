@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>#{detailEventBean.event.nombre}</title>
+    </h:head>
+    <h:body>
+        <b:panel title="#{detailEventBean.event.nombre}" collapsible="false">
+            <h:outputText value="#{detailEventBean.event.descripcion}" />
+            <h:outputText value="#{detailEventBean.event.direccion}" />
+            <h:outputText value="#{detailEventBean.event.fechainicio}" />
+            <h:outputText value="#{detailEventBean.event.fechafin}" />
+            <h:outputText value="#{detailEventBean.event.latitud}" />
+            <h:outputText value="#{detailEventBean.event.longitud}" />
+            <h:outputText value="#{detailEventBean.event.creador.nombre} #{detailEventBean.event.creador.apellidos}" />
+            <b:row>
+                <b:column col-md="10">
+                    <b:well>
+                        <h3>Comentario X</h3>
+                        HOLI I LOVE IT
+                    </b:well>
+                </b:column>
+            </b:row>
+        </b:panel>
+    </h:body>
+</html>
+
