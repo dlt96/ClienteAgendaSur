@@ -15,11 +15,11 @@
                         <b:icon name="user" />
                     </f:facet>
                 </b:inputText>
-                <b:inputText placeholder="Password" value = "#{UserBean.password}" label="Password" colMd="3" labelColMd="2">
+                <b:inputSecret placeholder="Password" value = "#{UserBean.password}" label="Password" colMd="3" labelColMd="2">
                     <f:facet name="prepend">
                         <b:iconAwesome name="key" />
                     </f:facet>
-                </b:inputText>
+                </b:inputSecret>
                 <b:commandButton value="Login" action="#{UserBean.doLogin()}" look="info"></b:commandButton>
 
             </b:form>
