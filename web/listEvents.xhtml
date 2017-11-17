@@ -34,6 +34,7 @@
                 <b:dataTableColumn>
                 <b:commandButton value="Editar" look="warning" action="#" />
                 <b:commandButton value="Borrar" look="danger" action="#{deleteAndModifyEvent.doEliminar(evento)}" />
+                <b:commandButton value="Ver Evento" look="info" action="#{detailEventBean.cargarEvento(evento)}"/>
                 </b:dataTableColumn> 
             </b:dataTable>
         </h:form>

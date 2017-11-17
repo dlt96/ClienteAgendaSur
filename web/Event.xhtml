@@ -3,27 +3,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>#{detailEventBean.event.nombre}</title>
     </h:head>
     <h:body>
-        <b:panel title="#{detailEventBean.event.nombre}" collapsible="false">
-            <h:outputText value="#{detailEventBean.event.descripcion}" />
-            <h:outputText value="#{detailEventBean.event.direccion}" />
-            <h:outputText value="#{detailEventBean.event.fechainicio}" />
-            <h:outputText value="#{detailEventBean.event.fechafin}" />
-            <h:outputText value="#{detailEventBean.event.latitud}" />
-            <h:outputText value="#{detailEventBean.event.longitud}" />
-            <h:outputText value="#{detailEventBean.event.creador.nombre} #{detailEventBean.event.creador.apellidos}" />
-            <b:row>
-                <b:column col-md="10">
-                    <b:well>
-                        <h3>Comentario X</h3>
-                        HOLI I LOVE IT
-                    </b:well>
-                </b:column>
-            </b:row>
+        <b:panel title="#{detailEventBean.event.nombre}" collapsible="false"><br/>
+            <h:outputText  value="#{detailEventBean.event.descripcion}" /><br/>
+            <h:outputText value="#{detailEventBean.event.direccion}" /><br/>
+            <h:outputText value="#{detailEventBean.event.fechainicio}" /><br/>
+            <h:outputText value="#{detailEventBean.event.fechafin}" /><br/>
+            <h:outputText value="#{detailEventBean.event.latitud}" /><br/>
+            <h:outputText value="#{detailEventBean.event.longitud}" /><br/>
+            <h:outputText value="#{detailEventBean.event.creador.nombre} #{detailEventBean.event.creador.apellidos}" /><br/>
+            <br/>
+            <ui:repeat value="#{detailEventBean.getComentarios()}" var="comentario">
+                <h:outputText value="#{comentario.usuario} #{comentario.fecha}"/><br/>
+                <h:outputText value="#{comentario.comentario}"/><br/>
+            </ui:repeat>
         </b:panel>
     </h:body>
 </html>
