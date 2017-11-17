@@ -30,7 +30,7 @@
                 <b:dataTableColumn value="#{evento.direccion}"/> 
                 <b:dataTableColumn>
                 <b:commandButton value="Editar" look="warning" action="#" />
-                <b:commandButton value="Borrar" look="danger" action="#{listadoEventos.doBorrar(evento)}" />
+                <b:commandButton value="Borrar" look="danger" action="#{deleteAndModifyEvent.doEliminar(evento)}" />
                 </b:dataTableColumn> 
             </b:dataTable>
         </h:form>

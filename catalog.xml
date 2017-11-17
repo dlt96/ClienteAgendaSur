@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://localhost:8080/AgendaSur-war/agendaSurService?wsdl" uri="src/conf/xml-resources/web-service-references/agendaSurService/wsdl/localhost_8080/AgendaSur-war/agendaSurService.wsdl"/>
-    <system systemId="http://localhost:8080/AgendaSur-war/agendaSurService?xsd=1" uri="src/conf/xml-resources/web-service-references/agendaSurService/wsdl/localhost_8080/AgendaSur-war/agendaSurService.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/AgendaSur-war/AgendaSurService?wsdl" uri="src/conf/xml-resources/web-service-references/AgendaSurService/wsdl/localhost_8080/AgendaSur-war/AgendaSurService.wsdl"/>
     <system systemId="http://localhost:8080/AgendaSur-war/AgendaSurService?xsd=1" uri="src/conf/xml-resources/web-service-references/AgendaSurService/wsdl/localhost_8080/AgendaSur-war/AgendaSurService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/AgendaSur-war/agendaSurService?wsdl" uri="src/conf/xml-resources/web-service-references/agendaSurService/wsdl/localhost_8080/AgendaSur-war/agendaSurService.wsdl"/>
+    <system systemId="http://localhost:8080/AgendaSur-war/agendaSurService?xsd=1" uri="src/conf/xml-resources/web-service-references/agendaSurService/wsdl/localhost_8080/AgendaSur-war/agendaSurService.xsd_1.xsd"/>
 </catalog>
