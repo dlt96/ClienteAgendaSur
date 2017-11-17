@@ -9,6 +9,9 @@
     </h:head>
     <h:body>
         <h:form>
+            
+            <b:commandButton value="Nuevo evento" look="info" action="#{UserBean.doCrear()}"/>
+            
             <b:dataTable value="#{listadoEventos.listaEventos}"
                          var="evento"
                          page-length="5"

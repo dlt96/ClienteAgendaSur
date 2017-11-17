@@ -65,6 +65,10 @@ public class UserBean implements Serializable {
             return null;
         }
     }
+    
+    public String doCrear(){
+        return "crearEvento";
+    }
 
     private java.util.List<client.Usuario> findAllUsuario() {
         client.AgendaSurService port = service.getAgendaSurServicePort();
@@ -77,4 +81,6 @@ public class UserBean implements Serializable {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findUsuario(id);
     }
+    
+    
 }
