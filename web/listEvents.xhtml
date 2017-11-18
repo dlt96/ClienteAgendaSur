@@ -18,8 +18,9 @@
                             <b:column span="2" contentDisabled="false">
                                 <b:commandButton value="Nuevo evento" look="info" action="#{UserBean.doCrear()}"/> 
                             </b:column>
+                                <b:commandButton value="Show only: " look="info" action="#{listadoEventos.showTags()}"/> 
                             <b:column span="3" contentDisabled="false">
-                                <b:selectOneMenu value="#{listadoEventos.tagSelected}" update="@parent" process="@form" label="Show only:" >
+                                <b:selectOneMenu value="#{listadoEventos.tagSelected}">
                                     <f:selectItems value="#{listadoEventos.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}" />
                                 </b:selectOneMenu>
                             </b:column>

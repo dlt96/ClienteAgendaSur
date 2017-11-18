@@ -8,6 +8,7 @@ package agendasur.bean;
 import client.AgendaSurService_Service;
 import client.Evento;
 import client.Tag;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -62,15 +63,21 @@ public class listadoEventos {
 
     public void setTagSelected(String tagSelected) {
         this.tagSelected = tagSelected;
-        System.out.println(tagSelected);
         if(!tagSelected.equals("--")){
             client.AgendaSurService port = service.getAgendaSurServicePort();
             Tag t = port.findTag(tagSelected);
-            this.listaEventos =  findEventsByTag(t);
-            System.out.println(this.listaEventos.toString());
+            if(findEventsByTag(t).isEmpty()){
+                this.listaEventos = new ArrayList();
+            }else{
+                this.listaEventos = findEventsByTag(t);
+            }
         }else{
             init();
         }
+    }
+    
+    public String showTags(){
+        return null;
     }
     
     public java.util.List<client.Evento> findEventsByTag(Tag tag){
