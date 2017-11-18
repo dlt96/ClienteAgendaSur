@@ -7,12 +7,15 @@ package agendasur.bean;
 
 import client.AgendaSurService_Service;
 import client.Comentario;
+import client.ComentarioPK;
 import client.Evento;
 import client.Tag;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.xml.ws.WebServiceRef;
 
 /**
@@ -25,30 +28,31 @@ public class detailEventBean {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AgendaSur-war/agendaSurService.wsdl")
     private AgendaSurService_Service service;
-
+    @Inject
+    private UserBean userBean;
     /**
      * Creates a new instance of detailEventBean
      */
     public detailEventBean() {
     }
     
-    private Evento event;
+    private String text;
 
-    public Evento getEvent() {
-        return event;
+    public String getText() {
+        return text;
     }
 
-    public void setEvent(Evento event) {
-        this.event = event;
+    public void setText(String text) {
+        this.text = text;
     }
     
     public String cargarEvento(Evento event){
-        setEvent(event);
+        userBean.setEvent(event);
         return "Event";
     }
     
     public List<Comentario> getComentarios(){
-        List<Comentario> list = findComentariosEvento(event.getId());
+        List<Comentario> list = findComentariosEvento(userBean.getEvent().getId());
         return list;
     }
 
@@ -58,19 +62,27 @@ public class detailEventBean {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findComentariosEvento(arg0);
     }
-
-    private java.util.List<client.Evento> findEventosByTag(client.Tag arg0) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        client.AgendaSurService port = service.getAgendaSurServicePort();
-        return port.findEventosByTag(arg0);
+    
+    public String enviarComentario(){
+        Comentario c = new Comentario();
+        c.setEvento(userBean.getEvent());
+        c.setComentario(text);
+        Date d = new Date();
+        c.setFecha(d.toString());
+        c.setUsuario(userBean.getUsuario());
+        ComentarioPK cPK = new ComentarioPK();
+        cPK.setEventoId(userBean.getEvent().getId());
+        cPK.setUsuarioEmail(userBean.getEmail());
+        c.setComentarioPK(cPK);
+        this.createComentario(c);
+        return null;
     }
 
-    private java.util.List<client.Tag> findAllTag() {
+    private void createComentario(client.Comentario entity) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
-        return port.findAllTag();
+        port.createComentario(entity);
     }
     
 }

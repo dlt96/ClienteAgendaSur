@@ -6,22 +6,32 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>#{detailEventBean.event.nombre}</title>
+        <title>#{UserBean.event.nombre}</title>
     </h:head>
     <h:body>
-        <b:panel title="#{detailEventBean.event.nombre}" collapsible="false"><br/>
-            <h:outputText  value="#{detailEventBean.event.descripcion}" /><br/>
-            <h:outputText value="#{detailEventBean.event.direccion}" /><br/>
-            <h:outputText value="#{detailEventBean.event.fechainicio}" /><br/>
-            <h:outputText value="#{detailEventBean.event.fechafin}" /><br/>
-            <h:outputText value="#{detailEventBean.event.latitud}" /><br/>
-            <h:outputText value="#{detailEventBean.event.longitud}" /><br/>
-            <h:outputText value="#{detailEventBean.event.creador.nombre} #{detailEventBean.event.creador.apellidos}" /><br/>
+        <b:panel title="#{UserBean.event.nombre}" collapsible="false"><br/>
+            <h:outputText  value="#{UserBean.event.descripcion}" /><br/>
+            <h:outputText value="#{UserBean.event.direccion}" /><br/>
+            <h:outputText value="#{UserBean.event.fechainicio}" /><br/>
+            <h:outputText value="#{UserBean.event.fechafin}" /><br/>
+            <h:outputText value="#{UserBean.event.latitud}" /><br/>
+            <h:outputText value="#{UserBean.event.longitud}" /><br/>
+            <h:outputText value="#{UserBean.event.creador.nombre} #{UserBean.event.creador.apellidos}" /><br/>
             <br/>
             <ui:repeat value="#{detailEventBean.getComentarios()}" var="comentario">
-                <h:outputText value="#{comentario.usuario} #{comentario.fecha}"/><br/>
+                <h:outputText value="#{comentario.usuario.nombre} #{comentario.usuario.apellidos} #{comentario.fecha}"/><br/>
                 <h:outputText value="#{comentario.comentario}"/><br/>
             </ui:repeat>
+            <br/>
+            <h:outputText>Valoraciones</h:outputText>
+            <br/>
+            <h:form>
+            <b:inputTextarea placeholder="Excribe tu valoracion aqui" value="#{detailEventBean.text}">
+                
+            </b:inputTextarea>
+            <br/>
+            <b:commandButton value="Enviar valoracion" look="info" action="#{detailEventBean.enviarComentario()}" />
+            </h:form>
         </b:panel>
     </h:body>
 </html>

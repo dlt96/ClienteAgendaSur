@@ -6,6 +6,7 @@
 package agendasur.bean;
 
 import client.AgendaSurService_Service;
+import client.Evento;
 import client.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -26,12 +27,20 @@ public class UserBean implements Serializable {
     private String email;
     private String password;
     private Usuario usuario;
-
+    private Evento event;
+    
     public UserBean() {
     }
 
     public String getPassword() {
         return password;
+    }
+    public Evento getEvent() {
+        return event;
+    }
+
+    public void setEvent(Evento event) {
+        this.event = event;
     }
 
     public void setPassword(String password) {
