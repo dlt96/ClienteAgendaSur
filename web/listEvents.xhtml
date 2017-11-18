@@ -23,7 +23,7 @@
                             </b:column>
                             <b:column span="2" contentDisabled="false">
                                 <b:selectOneMenu value="#{listadoEventos.tagSelected}">
-                                    
+                                    <f:selectItem itemValue="--" itemLabel="Order by Date" />
                                     <f:selectItems value="#{listadoEventos.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}" />
                                 </b:selectOneMenu>
                             </b:column>
@@ -64,17 +64,16 @@
                             </f:facet>
                             <b:dataTableColumn value="#{evento.nombre}"/> 
                             <b:dataTableColumn value="#{evento.descripcion}"/> 
-                            <b:dataTableColumn value="#{evento.fechainicio.toString().substring(0,10)} #{evento.fechainicio.toString().substring(11,19)}"
-                                               order="asc"/> 
+                            <b:dataTableColumn value="#{evento.fechainicio.toString().substring(0,10)} #{evento.fechainicio.toString().substring(11,19)}" order="asc"/> 
                             <b:dataTableColumn value="#{evento.fechafin.toString().substring(0,10)} #{evento.fechafin.toString().substring(11,19)}"/> 
                             <b:dataTableColumn value="#{evento.direccion}"/> 
                             <b:dataTableColumn>
                                 <b:row contentDisabled="false">
                                     <b:column span="1"></b:column>
-                                    <b:column span="3" contentDisabled="false">
+                                    <b:column span="3" contentDisabled="false" rendered="#{UserBean.journalist}">
                                         <b:commandButton value="Editar" look="warning" action="#{deleteAndModifyEvent.doEditar(evento)}" />
                                     </b:column>
-                                    <b:column span="3" contentDisabled="false">
+                                    <b:column span="3" contentDisabled="false" rendered="#{UserBean.journalist}">
                                         <b:commandButton value="Borrar" look="danger" action="#{deleteAndModifyEvent.doEliminar(evento)}" />
                                     </b:column>
                                     <b:column span="3" contentDisabled="false">
