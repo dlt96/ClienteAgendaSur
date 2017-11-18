@@ -8,6 +8,7 @@ package agendasur.bean;
 import client.AgendaSurService_Service;
 import client.Comentario;
 import client.Evento;
+import client.Tag;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -47,14 +48,29 @@ public class detailEventBean {
     }
     
     public List<Comentario> getComentarios(){
-        return findCometariosEvento(event);
+        List<Comentario> list = findComentariosEvento(event.getId());
+        return list;
     }
 
-    private java.util.List<client.Comentario> findCometariosEvento(client.Evento arg0) {
+    private java.util.List<client.Comentario> findComentariosEvento(int arg0) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
-        return port.findCometariosEvento(arg0);
+        return port.findComentariosEvento(arg0);
+    }
+
+    private java.util.List<client.Evento> findEventosByTag(client.Tag arg0) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findEventosByTag(arg0);
+    }
+
+    private java.util.List<client.Tag> findAllTag() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findAllTag();
     }
     
 }

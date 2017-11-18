@@ -67,7 +67,7 @@ public class listadoEventos {
             client.AgendaSurService port = service.getAgendaSurServicePort();
             Tag t = port.findTag(tagSelected);
             this.listaEventos =  findEventsByTag(t);
-            System.out.println(this.listaEventos);
+            System.out.println(this.listaEventos.toString());
         }else{
             init();
         }
@@ -75,7 +75,7 @@ public class listadoEventos {
     
     public java.util.List<client.Evento> findEventsByTag(Tag tag){
         client.AgendaSurService port = service.getAgendaSurServicePort();
-        return port.findTagsEvento(tag);
+        return port.findEventosByTag(tag);
     }
     
     public String doBorrar(Evento evento){
