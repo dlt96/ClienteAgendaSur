@@ -26,11 +26,13 @@
             <h:outputText>Valoraciones</h:outputText>
             <br/>
             <h:form>
-            <b:inputTextarea placeholder="Excribe tu valoracion aqui" value="#{detailEventBean.text}">
-                
+            <b:inputTextarea placeholder="Excribe tu valoracion aqui" value="#{detailEventBean.text}">         
             </b:inputTextarea>
             <br/>
             <b:commandButton value="Enviar valoracion" look="info" action="#{detailEventBean.enviarComentario()}" />
+            <b:commandButton value="Validar evento" look="warning" rendered="#{detailEventBean.validar}" action="#" />
+            <b:commandButton icon-spin="true" iconAwesome="thumbs-down"
+              value="Me gusta" look="info" title="spin='true'" />
             </h:form>
         </b:panel>
     </h:body>
