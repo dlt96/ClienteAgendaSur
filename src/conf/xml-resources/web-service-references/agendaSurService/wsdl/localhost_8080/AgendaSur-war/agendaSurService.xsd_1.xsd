@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://services.agendasur/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://services.agendasur/">
 
+<xs:element name="asignarTagsAEvento" type="tns:asignarTagsAEvento"/>
+
+<xs:element name="asignarTagsAEventoResponse" type="tns:asignarTagsAEventoResponse"/>
+
 <xs:element name="comentario" type="tns:comentario"/>
 
 <xs:element name="countComentario" type="tns:countComentario"/>
@@ -56,9 +60,17 @@
 
 <xs:element name="findComentarioResponse" type="tns:findComentarioResponse"/>
 
+<xs:element name="findComentariosEvento" type="tns:findComentariosEvento"/>
+
+<xs:element name="findComentariosEventoResponse" type="tns:findComentariosEventoResponse"/>
+
 <xs:element name="findEvento" type="tns:findEvento"/>
 
 <xs:element name="findEventoResponse" type="tns:findEventoResponse"/>
+
+<xs:element name="findEventosByTag" type="tns:findEventosByTag"/>
+
+<xs:element name="findEventosByTagResponse" type="tns:findEventosByTagResponse"/>
 
 <xs:element name="findRangeComentario" type="tns:findRangeComentario"/>
 
@@ -166,6 +178,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="findEventosByTag">
+<xs:sequence>
+<xs:element name="arg0" type="tns:tag" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findEventosByTagResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:evento" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="findTag">
 <xs:sequence>
 <xs:element name="id" type="xs:anyType" minOccurs="0"/>
@@ -182,6 +206,17 @@
 <xs:sequence>
 <xs:element name="entity" type="tns:comentario" minOccurs="0"/>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="asignarTagsAEvento">
+<xs:sequence>
+<xs:element name="arg0" type="tns:evento" minOccurs="0"/>
+<xs:element name="arg1" type="tns:tag" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="asignarTagsAEventoResponse">
+<xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="createEvento">
@@ -206,9 +241,15 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="createTag">
+<xs:complexType name="findRangeEvento">
 <xs:sequence>
-<xs:element name="entity" type="tns:tag" minOccurs="0"/>
+<xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeEventoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:evento" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -222,15 +263,9 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="findRangeEvento">
+<xs:complexType name="createTag">
 <xs:sequence>
-<xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findRangeEventoResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:evento" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="entity" type="tns:tag" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -243,6 +278,12 @@
 <xs:complexType name="findEventoResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:evento" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="removeUsuario">
+<xs:sequence>
+<xs:element name="entity" type="tns:usuario" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -267,12 +308,6 @@
 <xs:complexType name="findComentarioResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:comentario" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="removeUsuario">
-<xs:sequence>
-<xs:element name="entity" type="tns:usuario" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -357,6 +392,18 @@
 <xs:complexType name="findRangeUsuarioResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:usuario" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findComentariosEvento">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findComentariosEventoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:comentario" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 

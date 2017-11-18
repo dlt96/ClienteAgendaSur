@@ -46,7 +46,7 @@
                                     document.getElementById("geoLongitude").value = y;
                                     document.getElementById("buttonGeo").click();
                                 }
-                            </script>
+                            </script> 
                                 
                         </b:row>
                         <b:row contentDisabled="false"> <br/> </b:row>
@@ -70,7 +70,7 @@
                                 <b:row contentDisabled="false">
                                     <b:column span="1"></b:column>
                                     <b:column span="3" contentDisabled="false">
-                                        <b:commandButton value="Editar" look="warning" action="#" />
+                                        <b:commandButton value="Editar" look="warning" action="#{deleteAndModifyEvent.doEditar(evento)}" />
                                     </b:column>
                                     <b:column span="3" contentDisabled="false">
                                         <b:commandButton value="Borrar" look="danger" action="#{deleteAndModifyEvent.doEliminar(evento)}" />

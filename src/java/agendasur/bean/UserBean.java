@@ -28,8 +28,17 @@ public class UserBean implements Serializable {
     private String password;
     private Usuario usuario;
     private Evento event;
+    private Evento eventoAeditar;
     
     public UserBean() {
+    }
+
+    public Evento getEventoAeditar() {
+        return eventoAeditar;
+    }
+
+    public void setEventoAeditar(Evento eventoAeditar) {
+        this.eventoAeditar = eventoAeditar;
     }
 
     public String getPassword() {

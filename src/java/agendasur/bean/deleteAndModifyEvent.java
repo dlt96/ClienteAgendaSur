@@ -7,9 +7,12 @@ package agendasur.bean;
 
 import client.AgendaSurService_Service;
 import client.Evento;
+import client.Tag;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -27,15 +30,22 @@ public class deleteAndModifyEvent {
     private AgendaSurService_Service service;
     private String nombre;
     private String descripcion;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private String fechaInicio;
+    private String fechaFin;
     private String direccion;
     private float longitud;
     private float latitud;
-    SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
+    private String selectedTags;
+    private List<Tag> listaTags;
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    
+   
     
     @Inject
     private listadoEventos listado;
+    
+    @Inject
+    private UserBean usuarioSesion;
     
     
 
@@ -44,6 +54,91 @@ public class deleteAndModifyEvent {
      */
     public deleteAndModifyEvent() {
     }
+    @PostConstruct
+    public void  init(){
+        listaTags = this.findAllTag();
+    }
+    public String getSelectedTags() {
+        return selectedTags;
+    }
+
+    public void setSelectedTags(String selectedTags) {
+        this.selectedTags = selectedTags;
+    }
+
+    public List<Tag> getListaTags() {
+        return listaTags;
+    }
+
+    public void setListaTags(List<Tag> listaTags) {
+        this.listaTags = listaTags;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Date getFechaInicio() throws ParseException {
+        return (fechaInicio != null) ? formatter.parse(fechaInicio) : new Date();
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = formatter.format(fechaInicio);
+    }
+
+    public Date getFechaFin() throws ParseException {
+        return (fechaFin != null) ? formatter.parse(fechaFin) : new Date();
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = formatter.format(fechaFin);
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public float getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(float longitud) {
+        this.longitud = longitud;
+    }
+
+    public float getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(float latitud) {
+        this.latitud = latitud;
+    }
+
+    public listadoEventos getListado() {
+        return listado;
+    }
+
+    public void setListado(listadoEventos listado) {
+        this.listado = listado;
+    }
+    
+    
     
     public String doEliminar(Evento evento){
         client.AgendaSurService port = service.getAgendaSurServicePort();
@@ -53,29 +148,68 @@ public class deleteAndModifyEvent {
     }
     
     public String doEditar(Evento evento) throws ParseException{
+        this.usuarioSesion.setEventoAeditar(evento);
         this.nombre=evento.getNombre();
         this.descripcion=evento.getDescripcion();
-        this.fechaInicio= format.parse(evento.getFechainicio());
-        this.fechaFin=format.parse(evento.getFechafin());
+        this.fechaInicio= (evento.getFechainicio());
+        this.fechaFin=(evento.getFechafin());
         this.direccion = evento.getDireccion();
         this.longitud = evento.getLongitud();
         this.latitud = evento.getLatitud();
-        return null;
+        return "editarEvento";
     }
     
-    public String doGuardar(Evento evento){
-        evento.setNombre(nombre);
-        evento.setDescripcion(descripcion);
-        evento.setFechainicio(fechaInicio.toString());
-        evento.setFechafin(fechaFin.toString());
-        evento.setDireccion(this.direccion);
-        evento.setLongitud(this.longitud);
-        evento.setLatitud(this.latitud);
+    public String doGuardar(){
+        String [] tags = selectedTags.split(",");
+        this.getListEvent(tags);
+        this.usuarioSesion.getEventoAeditar().setNombre(this.nombre);
+        this.usuarioSesion.getEventoAeditar().setDescripcion(this.descripcion);
+        this.usuarioSesion.getEventoAeditar().setFechainicio(this.fechaInicio);
+        this.usuarioSesion.getEventoAeditar().setFechafin(this.fechaFin);
+        this.usuarioSesion.getEventoAeditar().setDireccion(this.direccion);
+        this.usuarioSesion.getEventoAeditar().setLongitud(this.longitud);
+        this.usuarioSesion.getEventoAeditar().setLatitud(this.latitud);
         client.AgendaSurService port = service.getAgendaSurServicePort();
-        port.editEvento(evento);
+        port.editEvento(this.usuarioSesion.getEventoAeditar());
+        this.asignarTagsAEvento(this.usuarioSesion.getEventoAeditar(), this.listaTags);
         
-        return null;
+        return "listEvents";
         
+    }
+    
+    private void getListEvent(String[] tags){
+        this.listaTags.clear();
+        for (String tag : tags){
+            this.listaTags.add(this.findTag(tag));
+        }
+    }
+    
+    private java.util.List<client.Tag> findAllTag() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findAllTag();
+    }
+    
+    private Tag findTag(java.lang.Object id) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findTag(id);
+    }
+
+    private void asignarTagsAEvento(client.Evento arg0, java.util.List<client.Tag> arg1) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        port.asignarTagsAEvento(arg0, arg1);
+    }
+
+    private java.util.List<client.Evento> findAllEvento() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findAllEvento();
     }
     
     

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      >
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+         <b:container fluid="true" contentDisabled="false">
+            <br/>
+            <h:form>
+                <b:row contentDisabled="false">
+                    <b:column span="4" contentDisabled="false">
+                        <b:inputText value="#{deleteAndModifyEvent.nombre}" required="true" label="Nombre:"/>
+                        <b:inputText value="#{deleteAndModifyEvent.descripcion}" required="true" label="Descripcion:"/>
+                        <b:inputText value="#{deleteAndModifyEvent.direccion}" required="true" label="Dirección:"/>
+                        <b:selectMultiMenu value="#{deleteAndModifyEvent.selectedTags}" id="selectTags" label="Tags:">
+                            <f:selectItems value="#{deleteAndModifyEvent.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}"/>
+                        </b:selectMultiMenu><br/>
+                    </b:column>
+                    <b:column span="4" contentDisabled="false">
+                        <b:dateTimePicker mode="toggle-icon" showWeek="false" value="#{deleteAndModifyEvent.fechaInicio}" required="true" label="Fecha inicio:"/>
+                        <b:dateTimePicker mode="toggle-icon" showWeek="false" value="#{deleteAndModifyEvent.fechaFin}" required="true" label="Fecha Fin:"/>
+                        <b:inputText value="#{deleteAndModifyEvent.longitud}" required="true" label="Longitud:"/>
+                        <b:inputText value="#{deleteAndModifyEvent.latitud}" required="true" label="Latitud:"/>
+                    </b:column>
+                </b:row>
+                <br/>
+                <b:commandButton look="success" value="Guardar Evento" action="#{deleteAndModifyEvent.doGuardar()}"/>
+            </h:form>
+        </b:container>
+    </h:body>
+</html>
+

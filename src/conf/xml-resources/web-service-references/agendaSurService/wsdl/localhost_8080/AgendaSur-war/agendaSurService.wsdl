@@ -4,11 +4,17 @@
 <xsd:import namespace="http://services.agendasur/" schemaLocation="http://localhost:8080/AgendaSur-war/agendaSurService?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="findAllComentario">
-<part name="parameters" element="tns:findAllComentario"/>
+<message name="findComentariosEvento">
+<part name="parameters" element="tns:findComentariosEvento"/>
 </message>
-<message name="findAllComentarioResponse">
-<part name="parameters" element="tns:findAllComentarioResponse"/>
+<message name="findComentariosEventoResponse">
+<part name="parameters" element="tns:findComentariosEventoResponse"/>
+</message>
+<message name="asignarTagsAEvento">
+<part name="parameters" element="tns:asignarTagsAEvento"/>
+</message>
+<message name="asignarTagsAEventoResponse">
+<part name="parameters" element="tns:asignarTagsAEventoResponse"/>
 </message>
 <message name="findRangeComentario">
 <part name="parameters" element="tns:findRangeComentario"/>
@@ -16,23 +22,50 @@
 <message name="findRangeComentarioResponse">
 <part name="parameters" element="tns:findRangeComentarioResponse"/>
 </message>
+<message name="findAllComentario">
+<part name="parameters" element="tns:findAllComentario"/>
+</message>
+<message name="findAllComentarioResponse">
+<part name="parameters" element="tns:findAllComentarioResponse"/>
+</message>
+<message name="removeUsuario">
+<part name="parameters" element="tns:removeUsuario"/>
+</message>
+<message name="findRangeEvento">
+<part name="parameters" element="tns:findRangeEvento"/>
+</message>
+<message name="findRangeEventoResponse">
+<part name="parameters" element="tns:findRangeEventoResponse"/>
+</message>
+<message name="countEvento">
+<part name="parameters" element="tns:countEvento"/>
+</message>
+<message name="countEventoResponse">
+<part name="parameters" element="tns:countEventoResponse"/>
+</message>
 <message name="createComentario">
 <part name="parameters" element="tns:createComentario"/>
 </message>
-<message name="findRangeTag">
-<part name="parameters" element="tns:findRangeTag"/>
+<message name="createUsuario">
+<part name="parameters" element="tns:createUsuario"/>
 </message>
-<message name="findRangeTagResponse">
-<part name="parameters" element="tns:findRangeTagResponse"/>
-</message>
-<message name="countTag">
-<part name="parameters" element="tns:countTag"/>
-</message>
-<message name="countTagResponse">
-<part name="parameters" element="tns:countTagResponse"/>
+<message name="createEvento">
+<part name="parameters" element="tns:createEvento"/>
 </message>
 <message name="removeEvento">
 <part name="parameters" element="tns:removeEvento"/>
+</message>
+<message name="findEvento">
+<part name="parameters" element="tns:findEvento"/>
+</message>
+<message name="findEventoResponse">
+<part name="parameters" element="tns:findEventoResponse"/>
+</message>
+<message name="findRangeUsuario">
+<part name="parameters" element="tns:findRangeUsuario"/>
+</message>
+<message name="findRangeUsuarioResponse">
+<part name="parameters" element="tns:findRangeUsuarioResponse"/>
 </message>
 <message name="findUsuario">
 <part name="parameters" element="tns:findUsuario"/>
@@ -46,20 +79,32 @@
 <message name="findComentarioResponse">
 <part name="parameters" element="tns:findComentarioResponse"/>
 </message>
-<message name="createTag">
-<part name="parameters" element="tns:createTag"/>
+<message name="removeComentario">
+<part name="parameters" element="tns:removeComentario"/>
 </message>
-<message name="createUsuario">
-<part name="parameters" element="tns:createUsuario"/>
+<message name="countComentario">
+<part name="parameters" element="tns:countComentario"/>
 </message>
-<message name="createEvento">
-<part name="parameters" element="tns:createEvento"/>
+<message name="countComentarioResponse">
+<part name="parameters" element="tns:countComentarioResponse"/>
 </message>
-<message name="countEvento">
-<part name="parameters" element="tns:countEvento"/>
+<message name="findAllUsuario">
+<part name="parameters" element="tns:findAllUsuario"/>
 </message>
-<message name="countEventoResponse">
-<part name="parameters" element="tns:countEventoResponse"/>
+<message name="findAllUsuarioResponse">
+<part name="parameters" element="tns:findAllUsuarioResponse"/>
+</message>
+<message name="removeTag">
+<part name="parameters" element="tns:removeTag"/>
+</message>
+<message name="editTag">
+<part name="parameters" element="tns:editTag"/>
+</message>
+<message name="countTag">
+<part name="parameters" element="tns:countTag"/>
+</message>
+<message name="countTagResponse">
+<part name="parameters" element="tns:countTagResponse"/>
 </message>
 <message name="countUsuario">
 <part name="parameters" element="tns:countUsuario"/>
@@ -67,29 +112,14 @@
 <message name="countUsuarioResponse">
 <part name="parameters" element="tns:countUsuarioResponse"/>
 </message>
-<message name="editTag">
-<part name="parameters" element="tns:editTag"/>
-</message>
-<message name="removeTag">
-<part name="parameters" element="tns:removeTag"/>
-</message>
-<message name="findEvento">
-<part name="parameters" element="tns:findEvento"/>
-</message>
-<message name="findEventoResponse">
-<part name="parameters" element="tns:findEventoResponse"/>
-</message>
-<message name="editEvento">
-<part name="parameters" element="tns:editEvento"/>
-</message>
-<message name="removeComentario">
-<part name="parameters" element="tns:removeComentario"/>
-</message>
 <message name="findTag">
 <part name="parameters" element="tns:findTag"/>
 </message>
 <message name="findTagResponse">
 <part name="parameters" element="tns:findTagResponse"/>
+</message>
+<message name="editComentario">
+<part name="parameters" element="tns:editComentario"/>
 </message>
 <message name="findAllTag">
 <part name="parameters" element="tns:findAllTag"/>
@@ -103,61 +133,74 @@
 <message name="findAllEventoResponse">
 <part name="parameters" element="tns:findAllEventoResponse"/>
 </message>
-<message name="findRangeEvento">
-<part name="parameters" element="tns:findRangeEvento"/>
+<message name="findRangeTag">
+<part name="parameters" element="tns:findRangeTag"/>
 </message>
-<message name="findRangeEventoResponse">
-<part name="parameters" element="tns:findRangeEventoResponse"/>
+<message name="findRangeTagResponse">
+<part name="parameters" element="tns:findRangeTagResponse"/>
 </message>
-<message name="countComentario">
-<part name="parameters" element="tns:countComentario"/>
+<message name="createTag">
+<part name="parameters" element="tns:createTag"/>
 </message>
-<message name="countComentarioResponse">
-<part name="parameters" element="tns:countComentarioResponse"/>
+<message name="editEvento">
+<part name="parameters" element="tns:editEvento"/>
 </message>
-<message name="editComentario">
-<part name="parameters" element="tns:editComentario"/>
+<message name="findEventosByTag">
+<part name="parameters" element="tns:findEventosByTag"/>
 </message>
-<message name="removeUsuario">
-<part name="parameters" element="tns:removeUsuario"/>
-</message>
-<message name="findAllUsuario">
-<part name="parameters" element="tns:findAllUsuario"/>
-</message>
-<message name="findAllUsuarioResponse">
-<part name="parameters" element="tns:findAllUsuarioResponse"/>
-</message>
-<message name="findRangeUsuario">
-<part name="parameters" element="tns:findRangeUsuario"/>
-</message>
-<message name="findRangeUsuarioResponse">
-<part name="parameters" element="tns:findRangeUsuarioResponse"/>
+<message name="findEventosByTagResponse">
+<part name="parameters" element="tns:findEventosByTagResponse"/>
 </message>
 <message name="editUsuario">
 <part name="parameters" element="tns:editUsuario"/>
 </message>
 <portType name="agendaSurService">
-<operation name="findAllComentario">
-<input wsam:Action="http://services.agendasur/agendaSurService/findAllComentarioRequest" message="tns:findAllComentario"/>
-<output wsam:Action="http://services.agendasur/agendaSurService/findAllComentarioResponse" message="tns:findAllComentarioResponse"/>
+<operation name="findComentariosEvento">
+<input wsam:Action="http://services.agendasur/agendaSurService/findComentariosEventoRequest" message="tns:findComentariosEvento"/>
+<output wsam:Action="http://services.agendasur/agendaSurService/findComentariosEventoResponse" message="tns:findComentariosEventoResponse"/>
+</operation>
+<operation name="asignarTagsAEvento">
+<input wsam:Action="http://services.agendasur/agendaSurService/asignarTagsAEventoRequest" message="tns:asignarTagsAEvento"/>
+<output wsam:Action="http://services.agendasur/agendaSurService/asignarTagsAEventoResponse" message="tns:asignarTagsAEventoResponse"/>
 </operation>
 <operation name="findRangeComentario">
 <input wsam:Action="http://services.agendasur/agendaSurService/findRangeComentarioRequest" message="tns:findRangeComentario"/>
 <output wsam:Action="http://services.agendasur/agendaSurService/findRangeComentarioResponse" message="tns:findRangeComentarioResponse"/>
 </operation>
+<operation name="findAllComentario">
+<input wsam:Action="http://services.agendasur/agendaSurService/findAllComentarioRequest" message="tns:findAllComentario"/>
+<output wsam:Action="http://services.agendasur/agendaSurService/findAllComentarioResponse" message="tns:findAllComentarioResponse"/>
+</operation>
+<operation name="removeUsuario">
+<input wsam:Action="http://services.agendasur/agendaSurService/removeUsuario" message="tns:removeUsuario"/>
+</operation>
+<operation name="findRangeEvento">
+<input wsam:Action="http://services.agendasur/agendaSurService/findRangeEventoRequest" message="tns:findRangeEvento"/>
+<output wsam:Action="http://services.agendasur/agendaSurService/findRangeEventoResponse" message="tns:findRangeEventoResponse"/>
+</operation>
+<operation name="countEvento">
+<input wsam:Action="http://services.agendasur/agendaSurService/countEventoRequest" message="tns:countEvento"/>
+<output wsam:Action="http://services.agendasur/agendaSurService/countEventoResponse" message="tns:countEventoResponse"/>
+</operation>
 <operation name="createComentario">
 <input wsam:Action="http://services.agendasur/agendaSurService/createComentario" message="tns:createComentario"/>
 </operation>
-<operation name="findRangeTag">
-<input wsam:Action="http://services.agendasur/agendaSurService/findRangeTagRequest" message="tns:findRangeTag"/>
-<output wsam:Action="http://services.agendasur/agendaSurService/findRangeTagResponse" message="tns:findRangeTagResponse"/>
+<operation name="createUsuario">
+<input wsam:Action="http://services.agendasur/agendaSurService/createUsuario" message="tns:createUsuario"/>
 </operation>
-<operation name="countTag">
-<input wsam:Action="http://services.agendasur/agendaSurService/countTagRequest" message="tns:countTag"/>
-<output wsam:Action="http://services.agendasur/agendaSurService/countTagResponse" message="tns:countTagResponse"/>
+<operation name="createEvento">
+<input wsam:Action="http://services.agendasur/agendaSurService/createEvento" message="tns:createEvento"/>
 </operation>
 <operation name="removeEvento">
 <input wsam:Action="http://services.agendasur/agendaSurService/removeEvento" message="tns:removeEvento"/>
+</operation>
+<operation name="findEvento">
+<input wsam:Action="http://services.agendasur/agendaSurService/findEventoRequest" message="tns:findEvento"/>
+<output wsam:Action="http://services.agendasur/agendaSurService/findEventoResponse" message="tns:findEventoResponse"/>
+</operation>
+<operation name="findRangeUsuario">
+<input wsam:Action="http://services.agendasur/agendaSurService/findRangeUsuarioRequest" message="tns:findRangeUsuario"/>
+<output wsam:Action="http://services.agendasur/agendaSurService/findRangeUsuarioResponse" message="tns:findRangeUsuarioResponse"/>
 </operation>
 <operation name="findUsuario">
 <input wsam:Action="http://services.agendasur/agendaSurService/findUsuarioRequest" message="tns:findUsuario"/>
@@ -167,42 +210,37 @@
 <input wsam:Action="http://services.agendasur/agendaSurService/findComentarioRequest" message="tns:findComentario"/>
 <output wsam:Action="http://services.agendasur/agendaSurService/findComentarioResponse" message="tns:findComentarioResponse"/>
 </operation>
-<operation name="createTag">
-<input wsam:Action="http://services.agendasur/agendaSurService/createTag" message="tns:createTag"/>
+<operation name="removeComentario">
+<input wsam:Action="http://services.agendasur/agendaSurService/removeComentario" message="tns:removeComentario"/>
 </operation>
-<operation name="createUsuario">
-<input wsam:Action="http://services.agendasur/agendaSurService/createUsuario" message="tns:createUsuario"/>
+<operation name="countComentario">
+<input wsam:Action="http://services.agendasur/agendaSurService/countComentarioRequest" message="tns:countComentario"/>
+<output wsam:Action="http://services.agendasur/agendaSurService/countComentarioResponse" message="tns:countComentarioResponse"/>
 </operation>
-<operation name="createEvento">
-<input wsam:Action="http://services.agendasur/agendaSurService/createEvento" message="tns:createEvento"/>
+<operation name="findAllUsuario">
+<input wsam:Action="http://services.agendasur/agendaSurService/findAllUsuarioRequest" message="tns:findAllUsuario"/>
+<output wsam:Action="http://services.agendasur/agendaSurService/findAllUsuarioResponse" message="tns:findAllUsuarioResponse"/>
 </operation>
-<operation name="countEvento">
-<input wsam:Action="http://services.agendasur/agendaSurService/countEventoRequest" message="tns:countEvento"/>
-<output wsam:Action="http://services.agendasur/agendaSurService/countEventoResponse" message="tns:countEventoResponse"/>
+<operation name="removeTag">
+<input wsam:Action="http://services.agendasur/agendaSurService/removeTag" message="tns:removeTag"/>
+</operation>
+<operation name="editTag">
+<input wsam:Action="http://services.agendasur/agendaSurService/editTag" message="tns:editTag"/>
+</operation>
+<operation name="countTag">
+<input wsam:Action="http://services.agendasur/agendaSurService/countTagRequest" message="tns:countTag"/>
+<output wsam:Action="http://services.agendasur/agendaSurService/countTagResponse" message="tns:countTagResponse"/>
 </operation>
 <operation name="countUsuario">
 <input wsam:Action="http://services.agendasur/agendaSurService/countUsuarioRequest" message="tns:countUsuario"/>
 <output wsam:Action="http://services.agendasur/agendaSurService/countUsuarioResponse" message="tns:countUsuarioResponse"/>
 </operation>
-<operation name="editTag">
-<input wsam:Action="http://services.agendasur/agendaSurService/editTag" message="tns:editTag"/>
-</operation>
-<operation name="removeTag">
-<input wsam:Action="http://services.agendasur/agendaSurService/removeTag" message="tns:removeTag"/>
-</operation>
-<operation name="findEvento">
-<input wsam:Action="http://services.agendasur/agendaSurService/findEventoRequest" message="tns:findEvento"/>
-<output wsam:Action="http://services.agendasur/agendaSurService/findEventoResponse" message="tns:findEventoResponse"/>
-</operation>
-<operation name="editEvento">
-<input wsam:Action="http://services.agendasur/agendaSurService/editEvento" message="tns:editEvento"/>
-</operation>
-<operation name="removeComentario">
-<input wsam:Action="http://services.agendasur/agendaSurService/removeComentario" message="tns:removeComentario"/>
-</operation>
 <operation name="findTag">
 <input wsam:Action="http://services.agendasur/agendaSurService/findTagRequest" message="tns:findTag"/>
 <output wsam:Action="http://services.agendasur/agendaSurService/findTagResponse" message="tns:findTagResponse"/>
+</operation>
+<operation name="editComentario">
+<input wsam:Action="http://services.agendasur/agendaSurService/editComentario" message="tns:editComentario"/>
 </operation>
 <operation name="findAllTag">
 <input wsam:Action="http://services.agendasur/agendaSurService/findAllTagRequest" message="tns:findAllTag"/>
@@ -212,27 +250,19 @@
 <input wsam:Action="http://services.agendasur/agendaSurService/findAllEventoRequest" message="tns:findAllEvento"/>
 <output wsam:Action="http://services.agendasur/agendaSurService/findAllEventoResponse" message="tns:findAllEventoResponse"/>
 </operation>
-<operation name="findRangeEvento">
-<input wsam:Action="http://services.agendasur/agendaSurService/findRangeEventoRequest" message="tns:findRangeEvento"/>
-<output wsam:Action="http://services.agendasur/agendaSurService/findRangeEventoResponse" message="tns:findRangeEventoResponse"/>
+<operation name="findRangeTag">
+<input wsam:Action="http://services.agendasur/agendaSurService/findRangeTagRequest" message="tns:findRangeTag"/>
+<output wsam:Action="http://services.agendasur/agendaSurService/findRangeTagResponse" message="tns:findRangeTagResponse"/>
 </operation>
-<operation name="countComentario">
-<input wsam:Action="http://services.agendasur/agendaSurService/countComentarioRequest" message="tns:countComentario"/>
-<output wsam:Action="http://services.agendasur/agendaSurService/countComentarioResponse" message="tns:countComentarioResponse"/>
+<operation name="createTag">
+<input wsam:Action="http://services.agendasur/agendaSurService/createTag" message="tns:createTag"/>
 </operation>
-<operation name="editComentario">
-<input wsam:Action="http://services.agendasur/agendaSurService/editComentario" message="tns:editComentario"/>
+<operation name="editEvento">
+<input wsam:Action="http://services.agendasur/agendaSurService/editEvento" message="tns:editEvento"/>
 </operation>
-<operation name="removeUsuario">
-<input wsam:Action="http://services.agendasur/agendaSurService/removeUsuario" message="tns:removeUsuario"/>
-</operation>
-<operation name="findAllUsuario">
-<input wsam:Action="http://services.agendasur/agendaSurService/findAllUsuarioRequest" message="tns:findAllUsuario"/>
-<output wsam:Action="http://services.agendasur/agendaSurService/findAllUsuarioResponse" message="tns:findAllUsuarioResponse"/>
-</operation>
-<operation name="findRangeUsuario">
-<input wsam:Action="http://services.agendasur/agendaSurService/findRangeUsuarioRequest" message="tns:findRangeUsuario"/>
-<output wsam:Action="http://services.agendasur/agendaSurService/findRangeUsuarioResponse" message="tns:findRangeUsuarioResponse"/>
+<operation name="findEventosByTag">
+<input wsam:Action="http://services.agendasur/agendaSurService/findEventosByTagRequest" message="tns:findEventosByTag"/>
+<output wsam:Action="http://services.agendasur/agendaSurService/findEventosByTagResponse" message="tns:findEventosByTagResponse"/>
 </operation>
 <operation name="editUsuario">
 <input wsam:Action="http://services.agendasur/agendaSurService/editUsuario" message="tns:editUsuario"/>
@@ -240,7 +270,16 @@
 </portType>
 <binding name="agendaSurServicePortBinding" type="tns:agendaSurService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="findAllComentario">
+<operation name="findComentariosEvento">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="asignarTagsAEvento">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -258,35 +297,80 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="findAllComentario">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="removeUsuario">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+</operation>
+<operation name="findRangeEvento">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="countEvento">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="createComentario">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
 </operation>
-<operation name="findRangeTag">
+<operation name="createUsuario">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
-<output>
-<soap:body use="literal"/>
-</output>
 </operation>
-<operation name="countTag">
+<operation name="createEvento">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
-<output>
-<soap:body use="literal"/>
-</output>
 </operation>
 <operation name="removeEvento">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
+</operation>
+<operation name="findEvento">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="findRangeUsuario">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
 </operation>
 <operation name="findUsuario">
 <soap:operation soapAction=""/>
@@ -306,25 +390,43 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="createTag">
+<operation name="removeComentario">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
 </operation>
-<operation name="createUsuario">
+<operation name="countComentario">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="findAllUsuario">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="removeTag">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
 </operation>
-<operation name="createEvento">
+<operation name="editTag">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
 </operation>
-<operation name="countEvento">
+<operation name="countTag">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -342,39 +444,6 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="editTag">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-</operation>
-<operation name="removeTag">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-</operation>
-<operation name="findEvento">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="editEvento">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-</operation>
-<operation name="removeComentario">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-</operation>
 <operation name="findTag">
 <soap:operation soapAction=""/>
 <input>
@@ -383,6 +452,12 @@
 <output>
 <soap:body use="literal"/>
 </output>
+</operation>
+<operation name="editComentario">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
 </operation>
 <operation name="findAllTag">
 <soap:operation soapAction=""/>
@@ -402,7 +477,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="findRangeEvento">
+<operation name="findRangeTag">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -411,37 +486,19 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="countComentario">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="editComentario">
+<operation name="createTag">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
 </operation>
-<operation name="removeUsuario">
+<operation name="editEvento">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
 </operation>
-<operation name="findAllUsuario">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="findRangeUsuario">
+<operation name="findEventosByTag">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
