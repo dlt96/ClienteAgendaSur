@@ -15,7 +15,7 @@
                 <b:row contentDisabled="false">
                     <b:column span="4" contentDisabled="false">
                         <b:inputText value="#{crearEventoBean.nombre}" required="true" label="Nombre:"/>
-                        <b:inputText value="#{crearEventoBean.descripcion}" required="true" label="Nombre:"/>
+                        <b:inputText value="#{crearEventoBean.descripcion}" required="true" label="Descripcion:"/>
                         <b:inputText value="#{crearEventoBean.direccion}" required="true" label="Dirección:"/>
                         <b:selectMultiMenu value="#{crearEventoBean.selectedTags}" id="selectTags" label="Tags:">
                             <f:selectItems value="#{crearEventoBean.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}"/>

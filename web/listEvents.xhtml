@@ -8,36 +8,59 @@
         <title>Agenda Sur</title>
     </h:head>
     <h:body>
-        <h:form>
-            
-            <b:commandButton value="Nuevo evento" look="info" action="#{UserBean.doCrear()}"/>
-            
-            <b:dataTable value="#{listadoEventos.listaEventos}"
-                         var="evento"
-                         page-length="5"
-                         page-length-menu="5,10,20">
-                <f:facet name="header">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Fecha inicio</th>
-                        <th>Fecha fin</th>
-                        <th>Ubicacion</th>
-                        <th>Acciones</th>
-                    </tr>
-                </f:facet>
-                <b:dataTableColumn value="#{evento.nombre}"/> 
-                <b:dataTableColumn value="#{evento.descripcion}"/> 
-                <b:dataTableColumn value="#{evento.fechainicio.toString().substring(0,10)} #{evento.fechainicio.toString().substring(11,19)}"/> 
-                <b:dataTableColumn value="#{evento.fechafin.toString().substring(0,10)} #{evento.fechafin.toString().substring(11,19)}"/> 
-                <b:dataTableColumn value="#{evento.direccion}"/> 
-                <b:dataTableColumn>
-                <b:commandButton value="Editar" look="warning" action="#" />
-                <b:commandButton value="Borrar" look="danger" action="#{deleteAndModifyEvent.doEliminar(evento)}" />
-                <b:commandButton value="Ver Evento" look="info" action="#{detailEventBean.cargarEvento(evento)}"/>
-                </b:dataTableColumn> 
-            </b:dataTable>
-        </h:form>
+        <b:container fluid="true" contentDisabled="false">
+            <br/>
+            <h:form>
+                <b:row contentDisabled="false">
+                    <b:column span="1" contentDisabled="false"></b:column>
+                    <b:column span="10" contentDisabled="false">
+                        <b:row contentDisabled="false">
+                            <b:column span="2" contentDisabled="false">
+                                <b:commandButton value="Nuevo evento" look="info" action="#{UserBean.doCrear()}"/> 
+                            </b:column>
+                            <b:column span="3" contentDisabled="false">
+                                <b:selectOneMenu value="#{listadoEventos.tagSelected}" update="@parent" process="@form" label="Show only:" >
+                                    <f:selectItems value="#{listadoEventos.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}" />
+                                </b:selectOneMenu>
+                            </b:column>
+                        </b:row>
+                        <b:row contentDisabled="false"> <br/> </b:row>
+                        <b:dataTable value="#{listadoEventos.listaEventos}" var="evento" page-length="5" page-length-menu="5,10,20">
+                            <f:facet name="header">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Descripcion</th>
+                                    <th>Fecha inicio</th>
+                                    <th>Fecha fin</th>
+                                    <th>Ubicacion</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </f:facet>
+                            <b:dataTableColumn value="#{evento.nombre}"/> 
+                            <b:dataTableColumn value="#{evento.descripcion}"/> 
+                            <b:dataTableColumn value="#{evento.fechainicio.toString().substring(0,10)} #{evento.fechainicio.toString().substring(11,19)}"/> 
+                            <b:dataTableColumn value="#{evento.fechafin.toString().substring(0,10)} #{evento.fechafin.toString().substring(11,19)}"/> 
+                            <b:dataTableColumn value="#{evento.direccion}"/> 
+                            <b:dataTableColumn>
+                                <b:row contentDisabled="false">
+                                    <b:column span="1"></b:column>
+                                    <b:column span="3" contentDisabled="false">
+                                        <b:commandButton value="Editar" look="warning" action="#" />
+                                    </b:column>
+                                    <b:column span="3" contentDisabled="false">
+                                        <b:commandButton value="Borrar" look="danger" action="#{deleteAndModifyEvent.doEliminar(evento)}" />
+                                    </b:column>
+                                    <b:column span="3" contentDisabled="false">
+                                        <b:commandButton value="Ver Evento" look="info" action="#{detailEventBean.cargarEvento(evento)}"/>
+                                    </b:column>
+                                </b:row>
+                            </b:dataTableColumn> 
+                        </b:dataTable>
+                    </b:column>
+                    <b:column span="1" contentDisabled="false"></b:column>
+                </b:row>
+            </h:form>
+        </b:container>
     </h:body>
 </html>
 
