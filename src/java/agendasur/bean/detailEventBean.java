@@ -30,10 +30,22 @@ public class detailEventBean {
     private AgendaSurService_Service service;
     @Inject
     private UserBean userBean;
-    /**
-     * Creates a new instance of detailEventBean
-     */
+    private Boolean validar;
+
     public detailEventBean() {
+    }
+    
+    @PostConstruct
+    public void init(){
+        validar = (userBean.getUsuario().getTipousuario()) == 3 && (userBean.getEvent().isValidado());
+    }
+    
+    public Boolean getValidar() {
+        return validar;
+    }
+
+    public void setValidar(Boolean validar) {
+        this.validar = validar;
     }
     
     private String text;
