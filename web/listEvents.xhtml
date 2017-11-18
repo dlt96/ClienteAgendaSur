@@ -23,6 +23,7 @@
                             </b:column>
                             <b:column span="2" contentDisabled="false">
                                 <b:selectOneMenu value="#{listadoEventos.tagSelected}">
+                                    
                                     <f:selectItems value="#{listadoEventos.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}" />
                                 </b:selectOneMenu>
                             </b:column>
@@ -63,7 +64,8 @@
                             </f:facet>
                             <b:dataTableColumn value="#{evento.nombre}"/> 
                             <b:dataTableColumn value="#{evento.descripcion}"/> 
-                            <b:dataTableColumn value="#{evento.fechainicio.toString().substring(0,10)} #{evento.fechainicio.toString().substring(11,19)}"/> 
+                            <b:dataTableColumn value="#{evento.fechainicio.toString().substring(0,10)} #{evento.fechainicio.toString().substring(11,19)}"
+                                               order="asc"/> 
                             <b:dataTableColumn value="#{evento.fechafin.toString().substring(0,10)} #{evento.fechafin.toString().substring(11,19)}"/> 
                             <b:dataTableColumn value="#{evento.direccion}"/> 
                             <b:dataTableColumn>
