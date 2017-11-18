@@ -70,10 +70,11 @@ public class listadoEventos {
         if(!tagSelected.equals("--")){
             client.AgendaSurService port = service.getAgendaSurServicePort();
             Tag t = port.findTag(tagSelected);
-            if(findEventsByTag(t).isEmpty()){
-                this.listaEventos = new ArrayList();
-            }else{
-                this.listaEventos = findEventsByTag(t);
+            List<Evento> listaEventosFiltrada = this.findEventsByTag(t);
+            if (listaEventosFiltrada.isEmpty()){
+                this.listaEventos.clear();
+            } else {
+                this.listaEventos = listaEventosFiltrada;
             }
         }else{
             init();
