@@ -39,7 +39,7 @@ public class CrearEventoBean {
     private String fechaFin;
     private float latitud;
     private float longitud;
-    private String[] selectedTags;
+    private String selectedTags;
     
     private List<Tag> listaTags;
     
@@ -104,11 +104,11 @@ public class CrearEventoBean {
         this.listaTags = listaTags;
     }
     
-    public String[] getSelectedTags() {
+    public String getSelectedTags() {
         return selectedTags;
     }
 
-    public void setSelectedTags(String[] selectedTags) {
+    public void setSelectedTags(String selectedTags) {
         this.selectedTags = selectedTags;
     }    
 
@@ -131,6 +131,9 @@ public class CrearEventoBean {
     public String doCrear(){
         Evento evento = new Evento();
         
+        String[] tags = selectedTags.split(",");
+        this.getListEvent(tags);
+        
         evento.setNombre(this.nombre);
         evento.setDescripcion(this.descripcion);
         evento.setDireccion(this.direccion);
@@ -142,8 +145,17 @@ public class CrearEventoBean {
         evento.setCreador(userBean.getUsuario());
         
         this.createEvento(evento);
+        List<Evento> eventos = findAllEvento();
+        this.asignarTagsAEvento(eventos.get(eventos.size() - 1), listaTags);
         
         return "listEvents";
+    }
+    
+    private void getListEvent(String[] tags){
+        this.listaTags.clear();
+        for (String tag : tags){
+            this.listaTags.add(this.findTag(tag));
+        }
     }
 
     private java.util.List<client.Tag> findAllTag() {
@@ -159,4 +171,26 @@ public class CrearEventoBean {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.createEvento(entity);
     }
+
+    private Tag findTag(java.lang.Object id) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findTag(id);
+    }
+
+    private void asignarTagsAEvento(client.Evento arg0, java.util.List<client.Tag> arg1) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        port.asignarTagsAEvento(arg0, arg1);
+    }
+
+    private java.util.List<client.Evento> findAllEvento() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findAllEvento();
+    }
+    
 }
