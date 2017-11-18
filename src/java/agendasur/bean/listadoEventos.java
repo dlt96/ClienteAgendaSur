@@ -29,6 +29,10 @@ public class listadoEventos {
     private List<Evento> listaEventos;
     private List<Tag> listaTags;
     private String tagSelected;
+    
+    private int latitude;
+    private int longitude;
+    
     /**
      * Creates a new instance of listadoEventos
      */
@@ -80,6 +84,24 @@ public class listadoEventos {
         return null;
     }
     
+    public int getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(int latitude) {
+        System.out.println(latitude);
+        this.latitude = latitude;
+    }
+
+    public int getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(int longitude) {
+        System.out.println(longitude);
+        this.longitude = longitude;
+    }
+    
     public java.util.List<client.Evento> findEventsByTag(Tag tag){
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findEventosByTag(tag);
@@ -88,6 +110,11 @@ public class listadoEventos {
     public String doBorrar(Evento evento){
             removeEvento(evento);
             init();
+        return null;
+    }
+    
+    public String orderByLocation(){
+        System.out.println(this.latitude + " " + this.longitude);
         return null;
     }
     

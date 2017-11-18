@@ -18,12 +18,36 @@
                             <b:column span="2" contentDisabled="false">
                                 <b:commandButton value="Nuevo evento" look="info" action="#{UserBean.doCrear()}"/> 
                             </b:column>
+                            <b:column span="1" contentDisabled="false">
                                 <b:commandButton value="Show only: " look="info" action="#{listadoEventos.showTags()}"/> 
+                            </b:column>
                             <b:column span="2" contentDisabled="false">
                                 <b:selectOneMenu value="#{listadoEventos.tagSelected}">
                                     <f:selectItems value="#{listadoEventos.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}" />
                                 </b:selectOneMenu>
                             </b:column>
+                            <b:column span="2" contentDisabled="false">
+                                <b:commandButton value="Ordenar por Geolocalizacion" look="success" onclick="getPosition()"/>
+                                <h:inputHidden id="geoLatitude" value="#{listadoEventos.latitude}" />
+                                <h:inputHidden id="geoLongitude" value="#{listadoEventos.longitude}" />
+                                <b:commandButton id="buttonGeo" style="display: none" action="#{listadoEventos.orderByLocation}" />
+                            </b:column>
+       
+                            <script type="text/javascript">
+                                function getPosition(){
+                                    navigator.geolocation.getCurrentPosition(getVars);
+                                }
+                                
+                                function getVars() {
+                                    var x = position.coords.longitude;
+                                    var y = position.coords.latitude;
+                                    
+                                    document.getElementById("geoLatitude").value = x;
+                                    document.getElementById("geoLongitude").value = y;
+                                    document.getElementById("buttonGeo").click();
+                                }
+                            </script>
+                                
                         </b:row>
                         <b:row contentDisabled="false"> <br/> </b:row>
                         <b:dataTable value="#{listadoEventos.listaEventos}" var="evento" page-length="5" page-length-menu="5,10,20">
