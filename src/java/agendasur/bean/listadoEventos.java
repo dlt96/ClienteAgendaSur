@@ -92,6 +92,11 @@ public class listadoEventos {
         return null;
     }
     
+    public void noValidados(){
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        this.listaEventos = port.findEventosNoValidados();
+    }
+    
     public java.util.List<client.Evento> findEventsByTag(Tag tag){
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findEventosByTag(tag);

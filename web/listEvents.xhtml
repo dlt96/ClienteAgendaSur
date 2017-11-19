@@ -63,7 +63,7 @@
                             </b:column>
                             <b:column span="1" contentDisabled="false"></b:column>
                             <b:column span="3" contentDisabled="false">
-                                <b:commandButton value="Validar Eventos" look="warning" action="#"/>
+                                <b:commandButton value="Validar Eventos" rendered="#{UserBean.journalist}" look="warning" action="#{listadoEventos.noValidados}"/>
                             </b:column>
                             <b:column span="1" contentDisabled="false">
                                 <b:commandButton value="Log-Out" action="#{UserBean.doLogOut()}"/> 
