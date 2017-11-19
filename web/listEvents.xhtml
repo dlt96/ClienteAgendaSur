@@ -45,7 +45,7 @@
                     <b:column span="10" contentDisabled="false">
                         <b:row contentDisabled="false">
                             <b:column span="2" contentDisabled="false">
-                                <b:commandButton value="Nuevo evento" look="info" action="#{UserBean.doCrear()}"/> 
+                                <b:commandButton value="Nuevo evento" look="primary" action="#{UserBean.doCrear()}"/> 
                             </b:column>
                             <b:column span="1" contentDisabled="false">
                                 <b:commandButton value="Show only: " look="info" action="#{listadoEventos.showTags()}"/> 
@@ -61,7 +61,11 @@
                                 <h:inputHidden id="geoLatitude" value="#{UserBean.latitude}"/>
                                 <h:inputHidden id="geoLongitude" value="#{UserBean.longitude}" />
                             </b:column>
-                            <b:column span="2" contentDisabled="false">
+                            <b:column span="1" contentDisabled="false"></b:column>
+                            <b:column span="3" contentDisabled="false">
+                                <b:commandButton value="Validar Eventos" look="warning" action="#"/>
+                            </b:column>
+                            <b:column span="1" contentDisabled="false">
                                 <b:commandButton value="Log-Out" action="#{UserBean.doLogOut()}"/> 
                             </b:column>
 
