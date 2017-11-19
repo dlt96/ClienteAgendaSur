@@ -93,7 +93,7 @@ public class UserBean implements Serializable {
         System.out.println(longitude);
         this.longitude = longitude;
     }
-
+    
     public String doLogin() {
         if (email != null) {
             usuario = findUsuario(email);
@@ -129,6 +129,10 @@ public class UserBean implements Serializable {
     public boolean isValidar(){
         return isJournalist()&& !event.isValidado();
     }
+    
+    public boolean isMeGusta(){
+        return !existeMeGusta(event, usuario);
+    }
 
     private Usuario findUsuario(java.lang.Object id) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
@@ -136,5 +140,11 @@ public class UserBean implements Serializable {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findUsuario(id);
     }
-    
+
+    private boolean existeMeGusta(client.Evento arg0, client.Usuario arg1) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.existeMeGusta(arg0, arg1);
+    }
 }
