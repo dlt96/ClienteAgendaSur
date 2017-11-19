@@ -11,6 +11,7 @@ import client.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.faces.context.FacesContext;
 import javax.xml.ws.WebServiceRef;
 
 /**
@@ -104,6 +105,13 @@ public class UserBean implements Serializable {
             return null;
         }
     }
+    
+    public String doLogOut(){
+      FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+       return "LoginJSF";
+        
+    }
+
     
     public String doCrear(){
         return "crearEvento";

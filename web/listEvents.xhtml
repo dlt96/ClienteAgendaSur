@@ -61,6 +61,10 @@
                                 <h:inputHidden id="geoLatitude" value="#{UserBean.latitude}"/>
                                 <h:inputHidden id="geoLongitude" value="#{UserBean.longitude}" />
                             </b:column>
+                            <b:column span="2" contentDisabled="false">
+                                <b:commandButton value="Log-Out" action="#{UserBean.doLogOut()}"/> 
+                            </b:column>
+
                         </b:row>
                         <b:row contentDisabled="false"> <br/> </b:row>
                         <b:dataTable value="#{listadoEventos.listaEventos}" var="evento" page-length="5" page-length-menu="5,10,20">
