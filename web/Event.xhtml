@@ -126,6 +126,10 @@
                             </b:column>
                             <b:column medium-screen="2"></b:column>
                             <b:column medium-screen="1">
+                                <b:commandButton value="No validar evento" look="warning" rendered="#{UserBean.validar}" action="#{detailEventBean.rechazarEvento()}" />
+                            </b:column>
+                            <b:column medium-screen="2"></b:column>
+                            <b:column medium-screen="1">
                                 <b:commandButton icon-spin="true" iconAwesome="thumbs-up" value="" look="info" title="Me gusta" action="#{detailEventBean.darMeGusta()}" />
                             </b:column>
                         </b:row>
