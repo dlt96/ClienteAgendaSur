@@ -10,6 +10,7 @@ import client.Comentario;
 import client.ComentarioPK;
 import client.Evento;
 import client.Tag;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -31,15 +32,16 @@ public class detailEventBean {
     @Inject
     private UserBean userBean;
     private Boolean validar;
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public detailEventBean() {
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         validar = (userBean.getUsuario().getTipousuario()) == 3 && (userBean.getEvent().isValidado());
     }
-    
+
     public Boolean getValidar() {
         return validar;
     }
@@ -47,7 +49,7 @@ public class detailEventBean {
     public void setValidar(Boolean validar) {
         this.validar = validar;
     }
-    
+
     private String text;
 
     public String getText() {
@@ -57,13 +59,13 @@ public class detailEventBean {
     public void setText(String text) {
         this.text = text;
     }
-    
-    public String cargarEvento(Evento event){
+
+    public String cargarEvento(Evento event) {
         userBean.setEvent(event);
         return "Event";
     }
-    
-    public List<Comentario> getComentarios(){
+
+    public List<Comentario> getComentarios() {
         List<Comentario> list = findComentariosEvento(userBean.getEvent().getId());
         return list;
     }
@@ -74,13 +76,13 @@ public class detailEventBean {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findComentariosEvento(arg0);
     }
-    
-    public String enviarComentario(){
+
+    public String enviarComentario() {
         Comentario c = new Comentario();
         c.setEvento(userBean.getEvent());
         c.setComentario(text);
         Date d = new Date();
-        c.setFecha(d.toString());
+        c.setFecha(formatter.format(d));
         c.setUsuario(userBean.getUsuario());
         ComentarioPK cPK = new ComentarioPK();
         cPK.setEventoId(userBean.getEvent().getId());
@@ -90,15 +92,33 @@ public class detailEventBean {
         return null;
     }
 
+    public String darMeGusta() {
+        //darMeGusta(userBean.getEvent(), userBean.getUsuario());
+        return null;
+    }
+
+    public String validarEvento() {
+        userBean.getEvent().setValidado(true);
+        editEvento(userBean.getEvent());
+        return null;
+    }
+
     private void createComentario(client.Comentario entity) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.createComentario(entity);
     }
-    
-    public String volver(){
+
+    public String volver() {
         return "listEvents";
     }
-    
+
+    private void editEvento(client.Evento entity) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        port.editEvento(entity);
+    }
+
 }

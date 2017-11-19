@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    
+
     <h:head>
         <title>#{UserBean.event.nombre}</title>
     </h:head>
@@ -21,90 +21,95 @@
                             <h:outputText value="Nombre del Evento:" style="font-weight: bold"/>
                         </b:column>
                         <b:column medium-screen="5">
-                          <h:outputText value="#{UserBean.event.nombre}"/>
+                            <h:outputText value="#{UserBean.event.nombre}"/>
                         </b:column>
                     </b:row>
                     <b:row>
                         <b:column medium-screen="1"></b:column>
                         <b:column medium-screen="5">
-                          <h:outputText value="Descripción:" style="font-weight: bold"/>
+                            <h:outputText value="Descripción:" style="font-weight: bold"/>
                         </b:column>
                         <b:column medium-screen="5">
-                          <h:outputText value="#{UserBean.event.descripcion}"/>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column medium-screen="1"></b:column>
-                        <b:column medium-screen="5">
-                          <h:outputText value="Dirección:" style="font-weight: bold"/>
-                        </b:column>
-                        <b:column medium-screen="5">
-                          <h:outputText value="#{UserBean.event.direccion}"/>
+                            <h:outputText value="#{UserBean.event.descripcion}"/>
                         </b:column>
                     </b:row>
                     <b:row>
                         <b:column medium-screen="1"></b:column>
                         <b:column medium-screen="5">
-                          <h:outputText value="Fecha de Inicio:" style="font-weight: bold"/>
+                            <h:outputText value="Dirección:" style="font-weight: bold"/>
                         </b:column>
                         <b:column medium-screen="5">
-                          <h:outputText value="#{UserBean.event.fechainicio}"/>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column medium-screen="1"></b:column>
-                        <b:column medium-screen="5">
-                          <h:outputText value="Fecha de Fin:" style="font-weight: bold"/>
-                        </b:column>
-                        <b:column medium-screen="5">
-                          <h:outputText value="#{UserBean.event.fechafin}"/>
+                            <h:outputText value="#{UserBean.event.direccion}"/>
                         </b:column>
                     </b:row>
                     <b:row>
                         <b:column medium-screen="1"></b:column>
                         <b:column medium-screen="5">
-                          <h:outputText value="Latitud:" style="font-weight: bold"/>
+                            <h:outputText value="Fecha de Inicio:" style="font-weight: bold"/>
                         </b:column>
                         <b:column medium-screen="5">
-                          <h:outputText value="#{UserBean.event.latitud}"/>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column medium-screen="1"></b:column>
-                        <b:column medium-screen="5">
-                          <h:outputText value="Longitud:" style="font-weight: bold"/>
-                        </b:column>
-                        <b:column medium-screen="5">
-                          <h:outputText value="#{UserBean.event.longitud}"/>
+                            <h:outputText value="#{UserBean.event.fechainicio}"/>
                         </b:column>
                     </b:row>
                     <b:row>
                         <b:column medium-screen="1"></b:column>
                         <b:column medium-screen="5">
-                          <h:outputText value="Creado por:" style="font-weight: bold"/>
+                            <h:outputText value="Fecha de Fin:" style="font-weight: bold"/>
                         </b:column>
                         <b:column medium-screen="5">
-                          <h:outputText value="#{UserBean.event.creador.nombre} #{UserBean.event.creador.apellidos}"/>
+                            <h:outputText value="#{UserBean.event.fechafin}"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column medium-screen="1"></b:column>
+                        <b:column medium-screen="5">
+                            <h:outputText value="Latitud:" style="font-weight: bold"/>
+                        </b:column>
+                        <b:column medium-screen="5">
+                            <h:outputText value="#{UserBean.event.latitud}"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column medium-screen="1"></b:column>
+                        <b:column medium-screen="5">
+                            <h:outputText value="Longitud:" style="font-weight: bold"/>
+                        </b:column>
+                        <b:column medium-screen="5">
+                            <h:outputText value="#{UserBean.event.longitud}"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column medium-screen="1"></b:column>
+                        <b:column medium-screen="5">
+                            <h:outputText value="Creado por:" style="font-weight: bold"/>
+                        </b:column>
+                        <b:column medium-screen="5">
+                            <h:outputText value="#{UserBean.event.creador.nombre} #{UserBean.event.creador.apellidos}"/>
                         </b:column>
                     </b:row>
                     <br/>
+                    <b:row style="margin-left: 20px">
+                        <h3>Valoraciones</h3>
+                    </b:row>
                     <ui:repeat value="#{detailEventBean.getComentarios()}" var="comentario">
-                        <b:row>
-                            <b:column medium-screen="1"></b:column>
-                            <b:column medium-screen="5">
-                                <h:outputText value="#{comentario.usuario.nombre} #{comentario.usuario.apellidos} #{comentario.fecha}" style="font-weight: bold"/><br/>
-                            </b:column>
-                            <b:column medium-screen="5">
-                                <h:outputText value="#{comentario.comentario}"/><br/>
-                            </b:column>
-                        </b:row>
+                        <b:well>
+                            <b:row>
+                                <b:column medium-screen="1"></b:column>
+                                <b:column medium-screen="5">
+                                    <h:outputText value="#{comentario.usuario.nombre} #{comentario.usuario.apellidos} #{comentario.fecha}" style="font-weight: bold"/><br/>
+                                </b:column>
+                                <b:column medium-screen="5">
+                                    <h:outputText value="#{comentario.comentario}"/><br/>
+                                </b:column>
+                            </b:row>
+                        </b:well>
                     </ui:repeat>
                     <br/>
                     <h:form>
                         <b:row>
                             <b:column medium-screen="1"></b:column>
                             <b:column medium-screen="5">
-                              <h:outputText value="Valoraciones:" style="font-weight: bold"/>
+                                <h:outputText value="Valoraciones:" style="font-weight: bold"/>
                             </b:column>
                             <b:column medium-screen="5">
                                 <b:inputTextarea maxlength="140" placeholder="Excribe tu valoracion aqui" value="#{detailEventBean.text}"></b:inputTextarea>
@@ -117,11 +122,11 @@
                             </b:column>
                             <b:column medium-screen="2"></b:column>
                             <b:column medium-screen="1">
-                                <b:commandButton value="Validar evento" look="warning" rendered="#{UserBean.validar}" />
+                                <b:commandButton value="Validar evento" look="warning" rendered="#{UserBean.validar}" action="#{detailEventBean.validarEvento()}" />
                             </b:column>
                             <b:column medium-screen="2"></b:column>
                             <b:column medium-screen="1">
-                                <b:commandButton icon-spin="true" iconAwesome="thumbs-up" value="" look="info" title="spin='true'" />
+                                <b:commandButton icon-spin="true" iconAwesome="thumbs-up" value="" look="info" title="Me gusta" action="#{detailEventBean.darMeGusta()}" />
                             </b:column>
                         </b:row>
                         <br/>
@@ -137,7 +142,7 @@
             </b:container>
         </b:column>
         <b:column span="3" contentDisabled="false"></b:column>
-        
+
     </h:body>
 </html>
 
