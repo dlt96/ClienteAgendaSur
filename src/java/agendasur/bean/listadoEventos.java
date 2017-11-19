@@ -48,7 +48,7 @@ public class listadoEventos {
     
     @PostConstruct
     public void init(){
-        listaEventos = findAllEvento();
+        listaEventos = this.findEventosNoCaducadosYValidados();
         listaTags = findAllTags();
     }
     
@@ -104,7 +104,7 @@ public class listadoEventos {
     }
     
     public String orderByLocation(){
-        for(Evento ev : findAllEvento()){
+        for(Evento ev : this.findEventosNoCaducadosYValidados()){
             Point p = new Point();
             p.latitude = (double) ev.getLatitud();
             System.err.println(p.latitude);
@@ -131,18 +131,18 @@ public class listadoEventos {
         return port.findAllTag();
     }
 
-    private java.util.List<client.Evento> findAllEvento() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        client.AgendaSurService port = service.getAgendaSurServicePort();
-        return port.findAllEvento();
-    }
-
     private void removeEvento(client.Evento entity) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.removeEvento(entity);
+    }
+
+    private java.util.List<client.Evento> findEventosNoCaducadosYValidados() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findEventosNoCaducadosYValidados();
     }
     
 }
