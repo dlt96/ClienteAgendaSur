@@ -184,6 +184,14 @@ public class deleteAndModifyEvent {
         }
     }
     
+    public String doValidar(){
+        this.usuarioSesion.getEvent().setValidado(true);
+        
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        port.editEvento(this.usuarioSesion.getEvent());
+        return "listEvents";
+    }
+    
     private java.util.List<client.Tag> findAllTag() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.

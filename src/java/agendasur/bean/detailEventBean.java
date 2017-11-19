@@ -9,8 +9,6 @@ import client.AgendaSurService_Service;
 import client.Comentario;
 import client.ComentarioPK;
 import client.Evento;
-import client.Tag;
-import client.Usuario;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -101,11 +99,13 @@ public class detailEventBean {
     public String validarEvento() {
         userBean.getEvent().setValidado(true);
         editEvento(userBean.getEvent());
+        this.sendMail("Tu evento "+this.userBean.getEvent().getNombre()+" ha sido publicado.", this.userBean.getEvent().getCreador().getEmail());
         return null;
     }
     
     public String rechazarEvento(){
         removeEvento(userBean.getEvent());
+        this.sendMail("Tu evento "+this.userBean.getEvent().getNombre()+" ha sido rechazado.", this.userBean.getEvent().getCreador().getEmail());
         userBean.setEvent(null);
         return "listEvents";
     }
@@ -140,6 +140,13 @@ public class detailEventBean {
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.darMeGusta(arg0, arg1);
+    }
+
+    private void sendMail(java.lang.String msj, java.lang.String email) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        port.sendMail(msj, email);
     }
 
 }

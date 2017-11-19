@@ -149,5 +149,12 @@ public class listadoEventos {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findEventosNoCaducadosYValidados();
     }
+
+    private java.util.List<client.Evento> findEventosNoValidados() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findEventosNoValidados();
+    }
     
 }
