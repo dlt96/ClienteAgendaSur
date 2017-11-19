@@ -30,8 +30,8 @@ public class listadoEventos {
     private List<Tag> listaTags;
     private String tagSelected;
     
-    private int latitude;
-    private int longitude;
+    private float latitude;
+    private float longitude;
     
     /**
      * Creates a new instance of listadoEventos
@@ -85,20 +85,20 @@ public class listadoEventos {
         return null;
     }
     
-    public int getLatitude() {
+    public float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(float latitude) {
         System.out.println(latitude);
         this.latitude = latitude;
     }
 
-    public int getLongitude() {
+    public float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(float longitude) {
         System.out.println(longitude);
         this.longitude = longitude;
     }

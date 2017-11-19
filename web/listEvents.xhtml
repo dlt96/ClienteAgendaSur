@@ -6,6 +6,35 @@
       xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title>Agenda Sur</title>
+        <script>
+	if (navigator.geolocation) {
+		var timeoutVal = 10 * 1000 * 1000;
+		navigator.geolocation.getCurrentPosition(
+			displayPosition,
+			displayError,
+			{ enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
+		);
+	}
+	else {
+		alert("Geolocation is not supported by this browser");
+	}
+        function displayPosition(position) {
+            var x = position.coords.longitude;
+            var y = position.coords.latitude;
+
+            document.getElementById("j_idt7:geoLongitude").value = x;
+            document.getElementById("j_idt7:geoLatitude").value = y;
+            
+        }
+   	function displayError(error) {
+		var errors = {
+			1: 'Permission denied',
+			2: 'Position unavailable',
+			3: 'Request timeout'
+		};
+		alert("Error: " + errors[error.code]);
+	}
+	</script>
     </h:head>
     <h:body style="background-color: #F0F8FF">
         <b:container fluid="true" contentDisabled="false">
@@ -28,27 +57,10 @@
                                 </b:selectOneMenu>
                             </b:column>
                             <b:column span="2" contentDisabled="false">
-                                <b:commandButton value="Ordenar por Geolocalizacion" look="success" onclick="getPosition()"/>
-                                <h:inputHidden id="geoLatitude" value="#{listadoEventos.latitude}" />
+                                <b:commandButton value="Ordenar por Geolocalizacion" look="success" action="#{listadoEventos.orderByLocation}"/>
+                                <h:inputHidden id="geoLatitude" value="#{listadoEventos.latitude}"/>
                                 <h:inputHidden id="geoLongitude" value="#{listadoEventos.longitude}" />
-                                <b:commandButton id="buttonGeo" style="display: none" action="#{listadoEventos.orderByLocation}" />
                             </b:column>
-       
-                            <script type="text/javascript">
-                                function getPosition(){
-                                    navigator.geolocation.getCurrentPosition(getVars);
-                                }
-                                
-                                function getVars() {
-                                    var x = position.coords.longitude;
-                                    var y = position.coords.latitude;
-                                    
-                                    document.getElementById("geoLatitude").value = x;
-                                    document.getElementById("geoLongitude").value = y;
-                                    document.getElementById("buttonGeo").click();
-                                }
-                            </script> 
-                                
                         </b:row>
                         <b:row contentDisabled="false"> <br/> </b:row>
                         <b:dataTable value="#{listadoEventos.listaEventos}" var="evento" page-length="5" page-length-menu="5,10,20">
