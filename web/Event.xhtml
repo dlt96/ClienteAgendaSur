@@ -116,7 +116,7 @@
                                 <b:commandButton value="Enviar valoracion" look="info" action="#{detailEventBean.enviarComentario()}" />
                             </b:column>
                             <b:column medium-screen="1">
-                                <b:commandButton value="Validar evento" look="warning" rendered="#{detailEventBean.validar}" action="#{detailEventBean.validarEvento()}" />
+                                <b:commandButton value="Validar evento" look="warning" rendered="#{UserBean.journalist}" />
                             </b:column>
                             <b:column medium-screen="1">
                                 <b:commandButton icon-spin="true" iconAwesome="thumbs-down" value="Me gusta" look="info" title="spin='true'" />
