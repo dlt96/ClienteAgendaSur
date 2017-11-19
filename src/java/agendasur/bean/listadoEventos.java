@@ -8,7 +8,6 @@ package agendasur.bean;
 import client.AgendaSurService_Service;
 import client.Evento;
 import client.Tag;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -117,10 +116,13 @@ public class listadoEventos {
                     * Math.cos(deg2rad(theta));
             dist = Math.acos(dist);
             dist = rad2deg(dist);
-            System.out.println(ev.getNombre() + " " + dist);
+            System.err.println(dist + " -> " + ev.getNombre());
         }
         return null;
     }
+    
+    private double deg2rad(double deg) { return (deg * Math.PI / 180.0); }
+    private double rad2deg(double rad) { return (rad * 180.0 / Math.PI); }
     
     private java.util.List<client.Tag> findAllTags() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
@@ -142,18 +144,5 @@ public class listadoEventos {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.removeEvento(entity);
     }
-    
-    private Double distanceFromMe(Point p) {
-        double theta = p.longitude - userBean.getLongitude();
-        double dist = Math.sin(deg2rad(p.latitude)) * Math.sin(deg2rad(userBean.getLatitude()))
-                + Math.cos(deg2rad(p.latitude)) * Math.cos(deg2rad(userBean.getLongitude()))
-                * Math.cos(deg2rad(theta));
-        dist = Math.acos(dist);
-        dist = rad2deg(dist);
-        return dist;
-    }
-
-    private double deg2rad(double deg) { return (deg * Math.PI / 180.0); }
-    private double rad2deg(double rad) { return (rad * 180.0 / Math.PI); }
     
 }
