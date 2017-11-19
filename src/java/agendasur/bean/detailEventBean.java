@@ -97,4 +97,8 @@ public class detailEventBean {
         port.createComentario(entity);
     }
     
+    public String volver(){
+        return "listEvents";
+    }
+    
 }

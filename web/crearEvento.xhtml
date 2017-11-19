@@ -8,30 +8,48 @@
     <h:head>
         <title>Facelet Title</title>
     </h:head>
-    <h:body>
-        <b:container fluid="true" contentDisabled="false">
-            <br/>
-            <h:form>
-                <b:row contentDisabled="false">
-                    <b:column span="4" contentDisabled="false">
-                        <b:inputText value="#{crearEventoBean.nombre}" required="true" label="Nombre:"/>
-                        <b:inputText value="#{crearEventoBean.descripcion}" required="true" label="Descripcion:"/>
-                        <b:inputText value="#{crearEventoBean.direccion}" required="true" label="Dirección:"/>
-                        <b:selectMultiMenu value="#{crearEventoBean.selectedTags}" id="selectTags" label="Tags:">
-                            <f:selectItems value="#{crearEventoBean.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}"/>
-                        </b:selectMultiMenu><br/>
-                    </b:column>
-                    <b:column span="4" contentDisabled="false">
-                        <b:dateTimePicker mode="toggle-icon" showWeek="false" value="#{crearEventoBean.fechaInicio}" required="true" label="Fecha inicio:"/>
-                        <b:dateTimePicker mode="toggle-icon" showWeek="false" value="#{crearEventoBean.fechaFin}" required="true" label="Fecha Fin:"/>
-                        <b:inputText value="#{crearEventoBean.longitud}" required="true" label="Longitud:"/>
-                        <b:inputText value="#{crearEventoBean.latitud}" required="true" label="Latitud:"/>
-                    </b:column>
-                </b:row>
-                <br/>
-                <b:commandButton look="success" value="Crear Evento" action="#{crearEventoBean.doCrear()}"/>
-            </h:form>
-        </b:container>
+    <h:body style="background-color: #F0F8FF">
+        <br/>
+        <b:column span="3" contentDisabled="false"></b:column>
+        <b:column span="6" contentDisabled="false">
+            <b:container fluid="true" contentDisabled="false">
+                <b:panel title="Crear nuevo evento" collapsible="false" look="primary"><br/>
+                    <h:form>
+                        <b:row contentDisabled="false">
+                            <b:column span="6" contentDisabled="false">
+                                <b:inputText value="#{crearEventoBean.nombre}" required="true" label="Nombre:"/>
+                                <b:inputText value="#{crearEventoBean.descripcion}" required="true" label="Descripcion:"/>
+                                <b:inputText value="#{crearEventoBean.direccion}" required="true" label="Dirección:"/>
+                                <b:selectMultiMenu value="#{crearEventoBean.selectedTags}" id="selectTags" label="Tags:">
+                                    <f:selectItems value="#{crearEventoBean.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}"/>
+                                </b:selectMultiMenu><br/>
+                            </b:column>
+                            <b:column span="6" contentDisabled="false">
+                                <b:dateTimePicker mode="toggle-icon" showWeek="false" value="#{crearEventoBean.fechaInicio}" required="true" label="Fecha inicio:"/>
+                                <b:dateTimePicker mode="toggle-icon" showWeek="false" value="#{crearEventoBean.fechaFin}" required="true" label="Fecha Fin:"/>
+                                <b:inputText value="#{crearEventoBean.longitud}" required="true" label="Longitud:"/>
+                                <b:inputText value="#{crearEventoBean.latitud}" required="true" label="Latitud:"/>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <b:row>
+                            <b:column span="3" contentDisabled="false">
+                                <b:commandButton look="success" value="Crear Evento" action="#{crearEventoBean.doCrear()}"/>
+                            </b:column>
+                        </b:row>
+                        </h:form>
+                    <h:form>
+                        <br/>
+                        <b:row>
+                            <b:column span="1" contentDisabled="false">
+                                <b:commandButton value="Volver" look="danger" action="#{crearEventoBean.volver()}" />
+                            </b:column>
+                        </b:row>
+                    </h:form>
+                </b:panel>
+            </b:container>
+        </b:column>
+        <b:column span="3" contentDisabled="false"></b:column>
     </h:body>
 </html>
 

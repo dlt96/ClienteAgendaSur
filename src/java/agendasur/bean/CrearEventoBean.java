@@ -201,4 +201,8 @@ public class CrearEventoBean {
         return port.findAllEvento();
     }
     
+    public String volver(){
+        return "listEvents";
+    }
+    
 }

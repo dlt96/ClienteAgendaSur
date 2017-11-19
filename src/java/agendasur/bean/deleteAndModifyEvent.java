@@ -212,7 +212,9 @@ public class deleteAndModifyEvent {
         return port.findAllEvento();
     }
     
-    
+    public String volver(){
+        return "listEvents";
+    }
 
 
 }
