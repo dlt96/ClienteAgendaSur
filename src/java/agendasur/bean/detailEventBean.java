@@ -10,6 +10,7 @@ import client.Comentario;
 import client.ComentarioPK;
 import client.Evento;
 import client.Tag;
+import client.Usuario;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -93,7 +94,7 @@ public class detailEventBean {
     }
 
     public String darMeGusta() {
-        //darMeGusta(userBean.getEvent(), userBean.getUsuario());
+        darMeGusta(userBean.getEvent(), userBean.getUsuario());
         return null;
     }
 
@@ -132,6 +133,13 @@ public class detailEventBean {
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.removeEvento(entity);
+    }
+
+    private void darMeGusta(client.Evento arg0, client.Usuario arg1) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        port.darMeGusta(arg0, arg1);
     }
 
 }
