@@ -23,12 +23,15 @@ public class UserBean implements Serializable {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AgendaSur-war/agendaSurService.wsdl")
     private AgendaSurService_Service service;
+    
 
     private String email;
     private String password;
     private Usuario usuario;
     private Evento event;
     private Evento eventoAeditar;
+    private double latitude;
+    private double longitude;
     
     public UserBean() {
     }
@@ -70,6 +73,24 @@ public class UserBean implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        System.out.println(latitude);
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        System.out.println(longitude);
+        this.longitude = longitude;
     }
 
     public String doLogin() {

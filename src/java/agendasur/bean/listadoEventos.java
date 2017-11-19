@@ -13,6 +13,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.xml.ws.WebServiceRef;
 
 /**
@@ -25,13 +26,20 @@ public class listadoEventos {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AgendaSur-war/AgendaSurService.wsdl")
     private AgendaSurService_Service service;
+    @Inject
+    private UserBean userBean;
 
     private List<Evento> listaEventos;
     private List<Tag> listaTags;
     private String tagSelected;
     
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
+    
+    class Point {
+        double latitude;
+        double longitude;
+    }
     
     /**
      * Creates a new instance of listadoEventos
@@ -85,24 +93,6 @@ public class listadoEventos {
         return null;
     }
     
-    public float getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(float latitude) {
-        System.out.println(latitude);
-        this.latitude = latitude;
-    }
-
-    public float getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(float longitude) {
-        System.out.println(longitude);
-        this.longitude = longitude;
-    }
-    
     public java.util.List<client.Evento> findEventsByTag(Tag tag){
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findEventosByTag(tag);
@@ -115,7 +105,20 @@ public class listadoEventos {
     }
     
     public String orderByLocation(){
-        System.out.println(this.latitude + " " + this.longitude);
+        for(Evento ev : findAllEvento()){
+            Point p = new Point();
+            p.latitude = (double) ev.getLatitud();
+            System.err.println(p.latitude);
+            p.longitude = (double) ev.getLongitud();
+            System.err.println(p.longitude);
+            double theta = p.longitude - userBean.getLongitude();
+            double dist = Math.sin(deg2rad(p.latitude)) * Math.sin(deg2rad(userBean.getLatitude()))
+                    + Math.cos(deg2rad(p.latitude)) * Math.cos(deg2rad(userBean.getLongitude()))
+                    * Math.cos(deg2rad(theta));
+            dist = Math.acos(dist);
+            dist = rad2deg(dist);
+            System.out.println(ev.getNombre() + " " + dist);
+        }
         return null;
     }
     
@@ -139,5 +142,18 @@ public class listadoEventos {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.removeEvento(entity);
     }
+    
+    private Double distanceFromMe(Point p) {
+        double theta = p.longitude - userBean.getLongitude();
+        double dist = Math.sin(deg2rad(p.latitude)) * Math.sin(deg2rad(userBean.getLatitude()))
+                + Math.cos(deg2rad(p.latitude)) * Math.cos(deg2rad(userBean.getLongitude()))
+                * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        return dist;
+    }
+
+    private double deg2rad(double deg) { return (deg * Math.PI / 180.0); }
+    private double rad2deg(double rad) { return (rad * 180.0 / Math.PI); }
     
 }

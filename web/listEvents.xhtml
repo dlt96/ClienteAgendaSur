@@ -58,8 +58,8 @@
                             </b:column>
                             <b:column span="2" contentDisabled="false">
                                 <b:commandButton value="Ordenar por Geolocalizacion" look="success" action="#{listadoEventos.orderByLocation}"/>
-                                <h:inputHidden id="geoLatitude" value="#{listadoEventos.latitude}"/>
-                                <h:inputHidden id="geoLongitude" value="#{listadoEventos.longitude}" />
+                                <h:inputHidden id="geoLatitude" value="#{UserBean.latitude}"/>
+                                <h:inputHidden id="geoLongitude" value="#{UserBean.longitude}" />
                             </b:column>
                         </b:row>
                         <b:row contentDisabled="false"> <br/> </b:row>
