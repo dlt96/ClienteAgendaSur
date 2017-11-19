@@ -117,6 +117,10 @@ public class UserBean implements Serializable {
     public boolean isJournalist(){
         return this.usuario.getTipousuario() == 3;
     }
+    
+    public boolean isValidar(){
+        return isJournalist()&& !event.isValidado();
+    }
 
     private Usuario findUsuario(java.lang.Object id) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.

@@ -107,7 +107,7 @@
                               <h:outputText value="Valoraciones:" style="font-weight: bold"/>
                             </b:column>
                             <b:column medium-screen="5">
-                              <b:inputTextarea placeholder="Excribe tu valoracion aqui" value="#{detailEventBean.text}"></b:inputTextarea>
+                                <b:inputTextarea maxlength="140" placeholder="Excribe tu valoracion aqui" value="#{detailEventBean.text}"></b:inputTextarea>
                             </b:column>
                         </b:row>
                         <b:row>
@@ -115,11 +115,13 @@
                             <b:column medium-screen="1">
                                 <b:commandButton value="Enviar valoracion" look="info" action="#{detailEventBean.enviarComentario()}" />
                             </b:column>
+                            <b:column medium-screen="2"></b:column>
                             <b:column medium-screen="1">
-                                <b:commandButton value="Validar evento" look="warning" rendered="#{UserBean.journalist}" />
+                                <b:commandButton value="Validar evento" look="warning" rendered="#{UserBean.validar}" />
                             </b:column>
+                            <b:column medium-screen="2"></b:column>
                             <b:column medium-screen="1">
-                                <b:commandButton icon-spin="true" iconAwesome="thumbs-down" value="Me gusta" look="info" title="spin='true'" />
+                                <b:commandButton icon-spin="true" iconAwesome="thumbs-up" value="" look="info" title="spin='true'" />
                             </b:column>
                         </b:row>
                         <br/>
