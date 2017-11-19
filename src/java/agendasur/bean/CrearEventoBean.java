@@ -8,6 +8,7 @@ package agendasur.bean;
 import client.AgendaSurService_Service;
 import client.Evento;
 import client.Tag;
+import client.Usuario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -131,24 +132,31 @@ public class CrearEventoBean {
     public String doCrear(){
         Evento evento = new Evento();
         
-        String[] tags = selectedTags.split(",");
-        this.getListEvent(tags);
-        
         evento.setNombre(this.nombre);
         evento.setDescripcion(this.descripcion);
         evento.setDireccion(this.direccion);
         evento.setFechainicio(this.fechaInicio);
         evento.setFechafin(this.fechaFin);
-        evento.setValidado(false);
+        this.setValidationToEvent(evento);
         evento.setLatitud(this.latitud);
         evento.setLongitud(this.longitud);
         evento.setCreador(userBean.getUsuario());
         
         this.createEvento(evento);
-        List<Evento> eventos = findAllEvento();
-        this.asignarTagsAEvento(eventos.get(eventos.size() - 1), listaTags);
+        
+        if(selectedTags != null && !"".equals(selectedTags)){
+            String[] tags = selectedTags.split(",");
+            this.getListEvent(tags);
+            List<Evento> eventos = findAllEvento();
+            this.asignarTagsAEvento(eventos.get(eventos.size() - 1), listaTags);
+        }
         
         return "listEvents";
+    }
+    
+    private void setValidationToEvent(Evento evento){
+        Usuario usuario = this.userBean.getUsuario();
+        evento.setValidado((usuario.getTipousuario() != 1));
     }
     
     private void getListEvent(String[] tags){

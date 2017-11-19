@@ -92,6 +92,10 @@ public class UserBean implements Serializable {
         this.event = evento;
         return "Event";
     }
+    
+    public boolean isJournalist(){
+        return this.usuario.getTipousuario() == 3;
+    }
 
     private Usuario findUsuario(java.lang.Object id) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
