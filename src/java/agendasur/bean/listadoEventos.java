@@ -109,25 +109,9 @@ public class listadoEventos {
     }
     
     public String orderByLocation(){
-        for(Evento ev : this.findEventosNoCaducadosYValidados()){
-            Point p = new Point();
-            p.latitude = (double) ev.getLatitud();
-            System.err.println(p.latitude);
-            p.longitude = (double) ev.getLongitud();
-            System.err.println(p.longitude);
-            double theta = p.longitude - userBean.getLongitude();
-            double dist = Math.sin(deg2rad(p.latitude)) * Math.sin(deg2rad(userBean.getLatitude()))
-                    + Math.cos(deg2rad(p.latitude)) * Math.cos(deg2rad(userBean.getLongitude()))
-                    * Math.cos(deg2rad(theta));
-            dist = Math.acos(dist);
-            dist = rad2deg(dist);
-            System.err.println(dist + " -> " + ev.getNombre());
-        }
+        this.listaEventos = this.findEventosOrdenadosPorDistancia(userBean.getLongitude(), userBean.getLatitude());
         return null;
     }
-    
-    private double deg2rad(double deg) { return (deg * Math.PI / 180.0); }
-    private double rad2deg(double rad) { return (rad * 180.0 / Math.PI); }
     
     private java.util.List<client.Tag> findAllTags() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
@@ -155,6 +139,13 @@ public class listadoEventos {
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findEventosNoValidados();
+    }
+
+    private java.util.List<client.Evento> findEventosOrdenadosPorDistancia(double arg0, double arg1) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findEventosOrdenadosPorDistancia(arg0, arg1);
     }
     
 }
