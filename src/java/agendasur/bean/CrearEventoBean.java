@@ -144,11 +144,16 @@ public class CrearEventoBean {
         
         this.createEvento(evento);
         
+        List<Evento> eventos = findAllEvento();
+        
         if(selectedTags != null && !"".equals(selectedTags)){
             String[] tags = selectedTags.split(",");
             this.getListEvent(tags);
-            List<Evento> eventos = findAllEvento();
             this.asignarTagsAEvento(eventos.get(eventos.size() - 1), listaTags);
+        }
+        
+        if(userBean.getUsuario().getTipousuario() != 1){
+            this.sendMail(eventos.get(eventos.size() - 1).getId());
         }
         
         return "listEvents";
@@ -204,5 +209,14 @@ public class CrearEventoBean {
     public String volver(){
         return "listEvents";
     }
+
+    private void sendMail(int arg0) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        port.sendMail(arg0);
+    }
+    
+    
     
 }

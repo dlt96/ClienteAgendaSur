@@ -99,13 +99,13 @@ public class detailEventBean {
     public String validarEvento() {
         userBean.getEvent().setValidado(true);
         editEvento(userBean.getEvent());
-        this.sendMail("Tu evento "+this.userBean.getEvent().getNombre()+" ha sido publicado.", this.userBean.getEvent().getCreador().getEmail());
+        this.sendMail(userBean.getEvent().getId());
         return null;
     }
     
     public String rechazarEvento(){
         removeEvento(userBean.getEvent());
-        this.sendMail("Tu evento "+this.userBean.getEvent().getNombre()+" ha sido rechazado.", this.userBean.getEvent().getCreador().getEmail());
+        this.sendMail(userBean.getEvent().getId());
         userBean.setEvent(null);
         return "listEvents";
     }
@@ -142,11 +142,13 @@ public class detailEventBean {
         port.darMeGusta(arg0, arg1);
     }
 
-    private void sendMail(java.lang.String msj, java.lang.String email) {
+    private void sendMail(int arg0) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
-        port.sendMail(msj, email);
+        port.sendMail(arg0);
     }
+
+
 
 }

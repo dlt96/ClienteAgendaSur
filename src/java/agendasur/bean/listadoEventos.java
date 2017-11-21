@@ -50,6 +50,7 @@ public class listadoEventos {
     public void init(){
         listaEventos = this.findEventosNoCaducadosYValidados();
         listaTags = findAllTags();
+        //listaEventos = this.findEventosNoValidados();
     }
     
     public void setListaEventos(List<Evento> listaEventos) {
