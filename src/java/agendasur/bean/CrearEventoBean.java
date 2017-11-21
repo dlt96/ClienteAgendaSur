@@ -11,6 +11,7 @@ import client.Tag;
 import client.Usuario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -32,7 +33,7 @@ public class CrearEventoBean {
 
     @Inject
     private UserBean userBean;
-    
+
     private String nombre;
     private String descripcion;
     private String direccion;
@@ -41,22 +42,22 @@ public class CrearEventoBean {
     private float latitud;
     private float longitud;
     private String selectedTags;
-    
+
     private List<Tag> listaTags;
-    
+
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    
+
     /**
      * Creates a new instance of CrearEventoBean
      */
     public CrearEventoBean() {
     }
-    
+
     @PostConstruct
-    public void init(){
-       listaTags = this.findAllTag();
+    public void init() {
+        listaTags = this.findAllTag();
     }
-    
+
     public Date getFechaInicio() throws ParseException {
         return (fechaInicio != null) ? formatter.parse(fechaInicio) : new Date();
     }
@@ -72,7 +73,7 @@ public class CrearEventoBean {
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = formatter.format(fechaFin);
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -88,7 +89,7 @@ public class CrearEventoBean {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     public String getDireccion() {
         return direccion;
     }
@@ -104,14 +105,14 @@ public class CrearEventoBean {
     public void setListaTags(List<Tag> listaTags) {
         this.listaTags = listaTags;
     }
-    
+
     public String getSelectedTags() {
         return selectedTags;
     }
 
     public void setSelectedTags(String selectedTags) {
         this.selectedTags = selectedTags;
-    }    
+    }
 
     public float getLatitud() {
         return latitud;
@@ -128,10 +129,10 @@ public class CrearEventoBean {
     public void setLongitud(float longitud) {
         this.longitud = longitud;
     }
-    
-    public String doCrear(){
+
+    public String doCrear() {
         Evento evento = new Evento();
-        
+
         evento.setNombre(this.nombre);
         evento.setDescripcion(this.descripcion);
         evento.setDireccion(this.direccion);
@@ -141,36 +142,41 @@ public class CrearEventoBean {
         evento.setLatitud(this.latitud);
         evento.setLongitud(this.longitud);
         evento.setCreador(userBean.getUsuario());
-        
+
         this.createEvento(evento);
-        
+
         List<Evento> eventos = findAllEvento();
-        
-        if(selectedTags != null && !"".equals(selectedTags)){
+
+        if (selectedTags != null && !"".equals(selectedTags)) {
             String[] tags = selectedTags.split(",");
-            this.getListEvent(tags);
-            this.asignarTagsAEvento(eventos.get(eventos.size() - 1), listaTags);
+            
+            this.asignarTagsAEvento(eventos.get(eventos.size() - 1), Arrays.asList(tags));
+
+            if (userBean.getUsuario().getTipousuario() != 1) {
+                this.sendMail(eventos.get(eventos.size() - 1).getId());
+            }
         }
-        
-        if(userBean.getUsuario().getTipousuario() != 1){
-            this.sendMail(eventos.get(eventos.size() - 1).getId());
-        }
-        
+
         return "listEvents";
     }
-    
-    private void setValidationToEvent(Evento evento){
+
+    public String volver() {
+        return "listEvents";
+    }
+
+    private void setValidationToEvent(Evento evento) {
         Usuario usuario = this.userBean.getUsuario();
         evento.setValidado((usuario.getTipousuario() != 1));
     }
-    
-    private void getListEvent(String[] tags){
+
+    /*
+    private void getListEvent(String[] tags) {
         this.listaTags.clear();
-        for (String tag : tags){
+        for (String tag : tags) {
             this.listaTags.add(this.findTag(tag));
         }
     }
-
+    */
     private java.util.List<client.Tag> findAllTag() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
@@ -192,22 +198,11 @@ public class CrearEventoBean {
         return port.findTag(id);
     }
 
-    private void asignarTagsAEvento(client.Evento arg0, java.util.List<client.Tag> arg1) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        client.AgendaSurService port = service.getAgendaSurServicePort();
-        port.asignarTagsAEvento(arg0, arg1);
-    }
-
     private java.util.List<client.Evento> findAllEvento() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findAllEvento();
-    }
-    
-    public String volver(){
-        return "listEvents";
     }
 
     private void sendMail(int arg0) {
@@ -216,7 +211,12 @@ public class CrearEventoBean {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.sendMail(arg0);
     }
-    
-    
-    
+
+    private void asignarTagsAEvento(client.Evento arg0, java.util.List<java.lang.String> arg1) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        port.asignarTagsAEvento(arg0, arg1);
+    }
+
 }

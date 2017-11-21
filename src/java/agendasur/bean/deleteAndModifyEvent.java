@@ -10,6 +10,7 @@ import client.Evento;
 import client.Tag;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -161,7 +162,7 @@ public class deleteAndModifyEvent {
     
     public String doGuardar(){
         String [] tags = selectedTags.split(",");
-        this.getListEvent(tags);
+        //this.getListEvent(tags);
         this.usuarioSesion.getEventoAeditar().setNombre(this.nombre);
         this.usuarioSesion.getEventoAeditar().setDescripcion(this.descripcion);
         this.usuarioSesion.getEventoAeditar().setFechainicio(this.fechaInicio);
@@ -171,19 +172,19 @@ public class deleteAndModifyEvent {
         this.usuarioSesion.getEventoAeditar().setLatitud(this.latitud);
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.editEvento(this.usuarioSesion.getEventoAeditar());
-        this.asignarTagsAEvento(this.usuarioSesion.getEventoAeditar(), this.listaTags);
+        this.asignarTagsAEvento(this.usuarioSesion.getEventoAeditar(), Arrays.asList(tags));
         
         return "listEvents";
         
     }
-    
+    /*
     private void getListEvent(String[] tags){
         this.listaTags.clear();
         for (String tag : tags){
             this.listaTags.add(this.findTag(tag));
         }
     }
-    
+    */
     public String doValidar(){
         this.usuarioSesion.getEvent().setValidado(true);
         
@@ -205,14 +206,7 @@ public class deleteAndModifyEvent {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findTag(id);
     }
-
-    private void asignarTagsAEvento(client.Evento arg0, java.util.List<client.Tag> arg1) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        client.AgendaSurService port = service.getAgendaSurServicePort();
-        port.asignarTagsAEvento(arg0, arg1);
-    }
-
+    
     private java.util.List<client.Evento> findAllEvento() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
@@ -224,5 +218,11 @@ public class deleteAndModifyEvent {
         return "listEvents";
     }
 
-
+    private void asignarTagsAEvento(client.Evento arg0, java.util.List<java.lang.String> arg1) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        port.asignarTagsAEvento(arg0, arg1);
+    }
+    
 }
