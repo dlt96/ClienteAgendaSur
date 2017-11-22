@@ -144,7 +144,7 @@ public class deleteAndModifyEvent {
     public String doEliminar(Evento evento){
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.removeEvento(evento);
-        listado.init();
+        usuarioSesion.cargarEventosYTags();
         return null;
     }
     
@@ -173,7 +173,7 @@ public class deleteAndModifyEvent {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.editEvento(this.usuarioSesion.getEventoAeditar());
         this.asignarTagsAEvento(this.usuarioSesion.getEventoAeditar(), Arrays.asList(tags));
-        
+        this.usuarioSesion.cargarEventosYTags();
         return "listEvents";
         
     }
