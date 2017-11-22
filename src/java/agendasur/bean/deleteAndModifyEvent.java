@@ -37,7 +37,6 @@ public class deleteAndModifyEvent {
     private float longitud;
     private float latitud;
     private String selectedTags;
-    private List<Tag> listaTags;
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     
    
@@ -55,24 +54,13 @@ public class deleteAndModifyEvent {
      */
     public deleteAndModifyEvent() {
     }
-    @PostConstruct
-    public void  init(){
-        listaTags = this.findAllTag();
-    }
+    
     public String getSelectedTags() {
         return selectedTags;
     }
 
     public void setSelectedTags(String selectedTags) {
         this.selectedTags = selectedTags;
-    }
-
-    public List<Tag> getListaTags() {
-        return listaTags;
-    }
-
-    public void setListaTags(List<Tag> listaTags) {
-        this.listaTags = listaTags;
     }
     
     public String getNombre() {
@@ -191,13 +179,6 @@ public class deleteAndModifyEvent {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.editEvento(this.usuarioSesion.getEvent());
         return "listEvents";
-    }
-    
-    private java.util.List<client.Tag> findAllTag() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        client.AgendaSurService port = service.getAgendaSurServicePort();
-        return port.findAllTag();
     }
     
     private Tag findTag(java.lang.Object id) {

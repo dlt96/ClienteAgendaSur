@@ -22,7 +22,7 @@
                                 <b:inputText value="#{deleteAndModifyEvent.descripcion}" required="true" label="Descripcion:"/>
                                 <b:inputText value="#{deleteAndModifyEvent.direccion}" required="true" label="Dirección:"/>
                                 <b:selectMultiMenu value="#{deleteAndModifyEvent.selectedTags}" id="selectTags" label="Tags:">
-                                    <f:selectItems value="#{deleteAndModifyEvent.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}"/>
+                                    <f:selectItems value="#{UserBean.listTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}"/>
                                 </b:selectMultiMenu><br/>
                             </b:column>
                             <b:column span="6" contentDisabled="false">

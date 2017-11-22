@@ -7,10 +7,12 @@ package agendasur.bean;
 
 import client.AgendaSurService_Service;
 import client.Evento;
+import client.Tag;
 import client.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.xml.ws.WebServiceRef;
 
@@ -24,7 +26,6 @@ public class UserBean implements Serializable {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AgendaSur-war/agendaSurService.wsdl")
     private AgendaSurService_Service service;
-    
 
     private String email;
     private String password;
@@ -33,8 +34,18 @@ public class UserBean implements Serializable {
     private Evento eventoAeditar;
     private double latitude;
     private double longitude;
-    
+
+    private List<Tag> listTags;
+
     public UserBean() {
+    }
+
+    public List<Tag> getListTags() {
+        return listTags;
+    }
+
+    public void setListTags(List<Tag> listTags) {
+        this.listTags = listTags;
     }
 
     public Evento getEventoAeditar() {
@@ -48,6 +59,7 @@ public class UserBean implements Serializable {
     public String getPassword() {
         return password;
     }
+
     public Evento getEvent() {
         return event;
     }
@@ -75,7 +87,7 @@ public class UserBean implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public double getLatitude() {
         return latitude;
     }
@@ -93,44 +105,44 @@ public class UserBean implements Serializable {
         System.out.println(longitude);
         this.longitude = longitude;
     }
-    
+
     public String doLogin() {
         if (email != null) {
             usuario = findUsuario(email);
         }
 
         if (usuario != null && usuario.getPassword().equals(password)) {
+            listTags = findAllTag();
             return "listEvents";
         } else {
             return null;
         }
     }
-    
-    public String doLogOut(){
-      FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-       return "LoginJSF";
-        
+
+    public String doLogOut() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "LoginJSF";
+
     }
 
-    
-    public String doCrear(){
+    public String doCrear() {
         return "crearEvento";
     }
-    
-    public String cargarEvento(Evento evento){
+
+    public String cargarEvento(Evento evento) {
         this.event = evento;
         return "Event";
     }
-    
-    public boolean isJournalist(){
+
+    public boolean isJournalist() {
         return this.usuario.getTipousuario() == 3;
     }
-    
-    public boolean isValidar(){
-        return isJournalist()&& !event.isValidado();
+
+    public boolean isValidar() {
+        return isJournalist() && !event.isValidado();
     }
-    
-    public boolean isMeGusta(){
+
+    public boolean isMeGusta() {
         return !existeMeGusta(event, usuario);
     }
 
@@ -146,5 +158,12 @@ public class UserBean implements Serializable {
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.existeMeGusta(arg0, arg1);
+    }
+
+    private java.util.List<client.Tag> findAllTag() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findAllTag();
     }
 }

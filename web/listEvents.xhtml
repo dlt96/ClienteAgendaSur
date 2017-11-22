@@ -7,34 +7,33 @@
     <h:head>
         <title>Agenda Sur</title>
         <script>
-	if (navigator.geolocation) {
-		var timeoutVal = 10 * 1000 * 1000;
-		navigator.geolocation.getCurrentPosition(
-			displayPosition,
-			displayError,
-			{ enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
-		);
-	}
-	else {
-		alert("Geolocation is not supported by this browser");
-	}
-        function displayPosition(position) {
-            var x = position.coords.longitude;
-            var y = position.coords.latitude;
+            if (navigator.geolocation) {
+                var timeoutVal = 10 * 1000 * 1000;
+                navigator.geolocation.getCurrentPosition(
+                        displayPosition,
+                        displayError,
+                        {enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0}
+                );
+            } else {
+                alert("Geolocation is not supported by this browser");
+            }
+            function displayPosition(position) {
+                var x = position.coords.longitude;
+                var y = position.coords.latitude;
 
-            document.getElementById("j_idt7:geoLongitude").value = x;
-            document.getElementById("j_idt7:geoLatitude").value = y;
-            
-        }
-   	function displayError(error) {
-		var errors = {
-			1: 'Permission denied',
-			2: 'Position unavailable',
-			3: 'Request timeout'
-		};
-		alert("Error: " + errors[error.code]);
-	}
-	</script>
+                document.getElementById("j_idt7:geoLongitude").value = x;
+                document.getElementById("j_idt7:geoLatitude").value = y;
+
+            }
+            function displayError(error) {
+                var errors = {
+                    1: 'Permission denied',
+                    2: 'Position unavailable',
+                    3: 'Request timeout'
+                };
+                alert("Error: " + errors[error.code]);
+            }
+        </script>
     </h:head>
     <h:body style="background-color: #F0F8FF">
         <b:container fluid="true" contentDisabled="false">
@@ -69,6 +68,17 @@
                                 <b:commandButton value="Log-Out" action="#{UserBean.doLogOut()}"/> 
                             </b:column>
 
+                        </b:row>
+                        <b:row contentDisabled="false"> <br/> </b:row>
+                        <b:row contentDisabled="false">
+                            <b:column span="4" contentDisabled="false">
+                                <b:selectMultiMenu includeSelectAllOption="true" value="#">
+                                    <f:selectItems value="#{UserBean.listTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}"/>
+                                </b:selectMultiMenu>
+                            </b:column>
+                            <b:column>
+                                <b:commandButton look="danger" value="Guardar preferencias" action="#"/>
+                            </b:column>
                         </b:row>
                         <b:row contentDisabled="false"> <br/> </b:row>
                         <b:dataTable value="#{listadoEventos.listaEventos}" var="evento" page-length="5" page-length-menu="5,10,20">
