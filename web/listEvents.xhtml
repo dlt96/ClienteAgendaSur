@@ -43,7 +43,7 @@
                     <b:column span="1" contentDisabled="false"></b:column>
                     <b:column span="10" contentDisabled="false">
                         <b:row contentDisabled="false">
-                            <b:column span="2" contentDisabled="false">
+                            <b:column span="1" contentDisabled="false">
                                 <b:commandButton value="Nuevo evento" look="primary" action="#{UserBean.doCrear()}"/> 
                             </b:column>
                             <b:column span="1" contentDisabled="false">
@@ -56,30 +56,28 @@
                                 </b:selectOneMenu>
                             </b:column>
                             <b:column span="2" contentDisabled="false">
-                                <b:commandButton value="Ordenar por Geolocalizacion" look="success" action="#{listadoEventos.orderByLocation}"/>
-                                <h:inputHidden id="geoLatitude" value="#{UserBean.latitude}"/>
-                                <h:inputHidden id="geoLongitude" value="#{UserBean.longitude}" />
+                                <b:commandButton value="Guardar mis Preferencias de Eventos" look="info" action="#"/>
                             </b:column>
-                            <b:column span="1" contentDisabled="false"></b:column>
-                            <b:column span="3" contentDisabled="false">
-                                <b:commandButton value="Validar Eventos" rendered="#{UserBean.journalist}" look="warning" action="#{listadoEventos.noValidados}"/>
-                            </b:column>
-                            <b:column span="1" contentDisabled="false">
-                                <b:commandButton value="Log-Out" action="#{UserBean.doLogOut()}"/> 
-                            </b:column>
-
-                        </b:row>
-                        <b:row contentDisabled="false"> <br/> </b:row>
-                        <b:row contentDisabled="false">
-                            <b:column span="4" contentDisabled="false">
+                            <b:column span="2" contentDisabled="false">
                                 <b:selectMultiMenu includeSelectAllOption="true" value="#">
                                     <f:selectItems value="#{UserBean.listTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}"/>
                                 </b:selectMultiMenu>
                             </b:column>
-                            <b:column>
-                                <b:commandButton look="danger" value="Guardar preferencias" action="#"/>
+                            <b:column span="2" contentDisabled="false">
+                                <b:commandButton value="Ordenar por Geolocalizacion" look="success" action="#{listadoEventos.orderByLocation}"/>
+                                <h:inputHidden id="geoLatitude" value="#{UserBean.latitude}"/>
+                                <h:inputHidden id="geoLongitude" value="#{UserBean.longitude}" />
                             </b:column>
+                            <b:column span="1" contentDisabled="false">
+                                <b:commandButton value="Validar Eventos" rendered="#{UserBean.journalist}" look="warning" action="#{listadoEventos.noValidados}"/>
+                            </b:column>
+                            <b:column span="1" contentDisabled="false">
+                                <b:commandButton value="Log-Out" look="danger" action="#{UserBean.doLogOut()}"/> 
+                            </b:column>
+
                         </b:row>
+                        <b:row contentDisabled="false"> <br/> </b:row>
+                        
                         <b:row contentDisabled="false"> <br/> </b:row>
                         <b:dataTable value="#{listadoEventos.listaEventos}" var="evento" page-length="5" page-length-menu="5,10,20">
                             <f:facet name="header">
