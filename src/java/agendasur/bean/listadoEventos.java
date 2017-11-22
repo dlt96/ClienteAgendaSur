@@ -8,6 +8,7 @@ package agendasur.bean;
 import client.AgendaSurService_Service;
 import client.Evento;
 import client.Tag;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -27,47 +28,22 @@ public class listadoEventos {
     private AgendaSurService_Service service;
     @Inject
     private UserBean userBean;
-
-    private List<Evento> listaEventos;
-    private List<Tag> listaTags;
+    
     private String tagSelected;
-    
-    private double latitude;
-    private double longitude;
-    
-    class Point {
-        double latitude;
-        double longitude;
-    }
     
     /**
      * Creates a new instance of listadoEventos
      */
     public listadoEventos() {
     }
-    
+    /*
     @PostConstruct
-    public void init(){
+    public void cargarEventosYTags(){
         listaEventos = this.findEventosNoCaducadosYValidados();
         listaTags = findAllTags();
         //listaEventos = this.findEventosNoValidados();
     }
-    
-    public void setListaEventos(List<Evento> listaEventos) {
-        this.listaEventos = listaEventos;
-    }
-
-    public List<Evento> getListaEventos() {
-        return listaEventos;
-    }
-   
-    public List<Tag> getListaTags() {
-        return listaTags;
-    }
-
-    public void setListaTags(List<Tag> listaTags) {
-        this.listaTags = listaTags;
-    }
+    */
    
     public String getTagSelected() {
         return tagSelected;
@@ -75,27 +51,33 @@ public class listadoEventos {
 
     public void setTagSelected(String tagSelected) {
         this.tagSelected = tagSelected;
+    }
+    
+    public String showTags(){
+        //userBean.setTagSelected(tagSelected);
         if(!tagSelected.equals("--")){
             client.AgendaSurService port = service.getAgendaSurServicePort();
             Tag t = port.findTag(tagSelected);
             List<Evento> listaEventosFiltrada = this.findEventsByTag(t);
             if (listaEventosFiltrada.isEmpty()){
-                this.listaEventos.clear();
+                //this.listaEventos.clear();
+                userBean.setListaEventos(new ArrayList<>());
             } else {
-                this.listaEventos = listaEventosFiltrada;
+                //this.listaEventos = listaEventosFiltrada;
+                userBean.setListaEventos(listaEventosFiltrada);
             }
         }else{
-            init();
+            //init();
+            this.userBean.cargarEventosYTags();
         }
-    }
-    
-    public String showTags(){
         return null;
     }
     
-    public void noValidados(){
+    public String noValidados(){
         client.AgendaSurService port = service.getAgendaSurServicePort();
-        this.listaEventos = port.findEventosNoValidados();
+        //this.listaEventos = port.findEventosNoValidados();
+        userBean.setListaEventos(port.findEventosNoValidados());
+        return null;
     }
     
     public java.util.List<client.Evento> findEventsByTag(Tag tag){
@@ -104,13 +86,15 @@ public class listadoEventos {
     }
     
     public String doBorrar(Evento evento){
-            removeEvento(evento);
-            init();
+        removeEvento(evento);
+        userBean.cargarEventosYTags();
         return null;
     }
     
     public String orderByLocation(){
-        this.listaEventos = this.findEventosOrdenadosPorDistancia(userBean.getLongitude(), userBean.getLatitude());
+        //listaEventos = this.findEventosOrdenadosPorDistancia(userBean.getLongitude(), userBean.getLatitude());
+        this.userBean.setListaEventos(findEventosOrdenadosPorDistancia(userBean.getLongitude(),
+                userBean.getLatitude()));
         return null;
     }
     

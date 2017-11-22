@@ -156,7 +156,7 @@ public class CrearEventoBean {
                 this.sendMail(eventos.get(eventos.size() - 1).getId());
             }
         }
-
+        userBean.cargarEventosYTags();
         return "listEvents";
     }
 
