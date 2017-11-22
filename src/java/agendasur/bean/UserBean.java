@@ -27,7 +27,6 @@ public class UserBean implements Serializable {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AgendaSur-war/agendaSurService.wsdl")
     private AgendaSurService_Service service;
-    
 
     private String email;
     private String password;
@@ -79,6 +78,7 @@ public class UserBean implements Serializable {
     public String getPassword() {
         return password;
     }
+
     public Evento getEvent() {
         return event;
     }
@@ -106,7 +106,7 @@ public class UserBean implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public double getLatitude() {
         return latitude;
     }
@@ -124,7 +124,7 @@ public class UserBean implements Serializable {
         System.out.println(longitude);
         this.longitude = longitude;
     }
-    
+
     public String doLogin() {
         if (email != null) {
             usuario = findUsuario(email);
@@ -147,21 +147,21 @@ public class UserBean implements Serializable {
     public String doCrear(){
         return "crearEvento";
     }
-    
-    public String cargarEvento(Evento evento){
+
+    public String cargarEvento(Evento evento) {
         this.event = evento;
         return "Event";
     }
-    
-    public boolean isJournalist(){
+
+    public boolean isJournalist() {
         return this.usuario.getTipousuario() == 3;
     }
-    
-    public boolean isValidar(){
-        return isJournalist()&& !event.isValidado();
+
+    public boolean isValidar() {
+        return isJournalist() && !event.isValidado();
     }
-    
-    public boolean isMeGusta(){
+
+    public boolean isMeGusta() {
         return !existeMeGusta(event, usuario);
     }
     

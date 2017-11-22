@@ -30,6 +30,10 @@
 
 <xs:element name="createUsuario" type="tns:createUsuario"/>
 
+<xs:element name="darMeGusta" type="tns:darMeGusta"/>
+
+<xs:element name="darMeGustaResponse" type="tns:darMeGustaResponse"/>
+
 <xs:element name="editComentario" type="tns:editComentario"/>
 
 <xs:element name="editEvento" type="tns:editEvento"/>
@@ -39,6 +43,10 @@
 <xs:element name="editUsuario" type="tns:editUsuario"/>
 
 <xs:element name="evento" type="tns:evento"/>
+
+<xs:element name="existeMeGusta" type="tns:existeMeGusta"/>
+
+<xs:element name="existeMeGustaResponse" type="tns:existeMeGustaResponse"/>
 
 <xs:element name="findAllComentario" type="tns:findAllComentario"/>
 
@@ -72,6 +80,18 @@
 
 <xs:element name="findEventosByTagResponse" type="tns:findEventosByTagResponse"/>
 
+<xs:element name="findEventosNoCaducadosYValidados" type="tns:findEventosNoCaducadosYValidados"/>
+
+<xs:element name="findEventosNoCaducadosYValidadosResponse" type="tns:findEventosNoCaducadosYValidadosResponse"/>
+
+<xs:element name="findEventosNoValidados" type="tns:findEventosNoValidados"/>
+
+<xs:element name="findEventosNoValidadosResponse" type="tns:findEventosNoValidadosResponse"/>
+
+<xs:element name="findEventosOrdenadosPorDistancia" type="tns:findEventosOrdenadosPorDistancia"/>
+
+<xs:element name="findEventosOrdenadosPorDistanciaResponse" type="tns:findEventosOrdenadosPorDistanciaResponse"/>
+
 <xs:element name="findRangeComentario" type="tns:findRangeComentario"/>
 
 <xs:element name="findRangeComentarioResponse" type="tns:findRangeComentarioResponse"/>
@@ -104,6 +124,10 @@
 
 <xs:element name="removeUsuario" type="tns:removeUsuario"/>
 
+<xs:element name="sendMail" type="tns:sendMail"/>
+
+<xs:element name="sendMailResponse" type="tns:sendMailResponse"/>
+
 <xs:element name="tag" type="tns:tag"/>
 
 <xs:element name="usuario" type="tns:usuario"/>
@@ -121,6 +145,43 @@
 <xs:complexType name="tag">
 <xs:sequence>
 <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findEventosByTag">
+<xs:sequence>
+<xs:element name="arg0" type="tns:tag" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findEventosByTagResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:evento" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="evento">
+<xs:sequence>
+<xs:element name="creador" type="tns:usuario" minOccurs="0"/>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+<xs:element name="direccion" type="xs:string" minOccurs="0"/>
+<xs:element name="fechafin" type="xs:string" minOccurs="0"/>
+<xs:element name="fechainicio" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="latitud" type="xs:float"/>
+<xs:element name="longitud" type="xs:float"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="validado" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="usuario">
+<xs:sequence>
+<xs:element name="apellidos" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="tipousuario" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -153,43 +214,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="evento">
-<xs:sequence>
-<xs:element name="creador" type="tns:usuario" minOccurs="0"/>
-<xs:element name="descripcion" type="xs:string" minOccurs="0"/>
-<xs:element name="direccion" type="xs:string" minOccurs="0"/>
-<xs:element name="fechafin" type="xs:string" minOccurs="0"/>
-<xs:element name="fechainicio" type="xs:string" minOccurs="0"/>
-<xs:element name="id" type="xs:int" minOccurs="0"/>
-<xs:element name="latitud" type="xs:float"/>
-<xs:element name="longitud" type="xs:float"/>
-<xs:element name="nombre" type="xs:string" minOccurs="0"/>
-<xs:element name="validado" type="xs:boolean" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="usuario">
-<xs:sequence>
-<xs:element name="apellidos" type="xs:string" minOccurs="0"/>
-<xs:element name="email" type="xs:string" minOccurs="0"/>
-<xs:element name="nombre" type="xs:string" minOccurs="0"/>
-<xs:element name="password" type="xs:string" minOccurs="0"/>
-<xs:element name="tipousuario" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findEventosByTag">
-<xs:sequence>
-<xs:element name="arg0" type="tns:tag" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findEventosByTagResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:evento" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="findTag">
 <xs:sequence>
 <xs:element name="id" type="xs:anyType" minOccurs="0"/>
@@ -208,10 +232,20 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="findEventosNoValidados">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="findEventosNoValidadosResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:evento" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="asignarTagsAEvento">
 <xs:sequence>
 <xs:element name="arg0" type="tns:evento" minOccurs="0"/>
-<xs:element name="arg1" type="tns:tag" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -223,6 +257,16 @@
 <xs:sequence>
 <xs:element name="entity" type="tns:evento" minOccurs="0"/>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendMail">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendMailResponse">
+<xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="editUsuario">
@@ -241,6 +285,16 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="countEvento">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="countEventoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="findRangeEvento">
 <xs:sequence>
 <xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
@@ -253,19 +307,32 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="countEvento">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="countEventoResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="createTag">
 <xs:sequence>
 <xs:element name="entity" type="tns:tag" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findEventosNoCaducadosYValidados">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="findEventosNoCaducadosYValidadosResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:evento" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="existeMeGusta">
+<xs:sequence>
+<xs:element name="arg0" type="tns:evento" minOccurs="0"/>
+<xs:element name="arg1" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="existeMeGustaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -345,12 +412,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="createUsuario">
-<xs:sequence>
-<xs:element name="entity" type="tns:usuario" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="findAllEvento">
 <xs:sequence/>
 </xs:complexType>
@@ -358,6 +419,12 @@
 <xs:complexType name="findAllEventoResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:evento" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createUsuario">
+<xs:sequence>
+<xs:element name="entity" type="tns:usuario" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -383,6 +450,19 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="findEventosOrdenadosPorDistancia">
+<xs:sequence>
+<xs:element name="arg0" type="xs:double"/>
+<xs:element name="arg1" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findEventosOrdenadosPorDistanciaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:evento" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="findRangeUsuario">
 <xs:sequence>
 <xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
@@ -395,6 +475,16 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="countUsuario">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="countUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="findComentariosEvento">
 <xs:sequence>
 <xs:element name="arg0" type="xs:int"/>
@@ -404,16 +494,6 @@
 <xs:complexType name="findComentariosEventoResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:comentario" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="countUsuario">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="countUsuarioResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -437,5 +517,16 @@
 <xs:sequence>
 <xs:element name="return" type="tns:tag" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="darMeGusta">
+<xs:sequence>
+<xs:element name="arg0" type="tns:evento" minOccurs="0"/>
+<xs:element name="arg1" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="darMeGustaResponse">
+<xs:sequence/>
 </xs:complexType>
 </xs:schema>

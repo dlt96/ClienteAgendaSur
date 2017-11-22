@@ -7,34 +7,33 @@
     <h:head>
         <title>Agenda Sur</title>
         <script>
-	if (navigator.geolocation) {
-		var timeoutVal = 10 * 1000 * 1000;
-		navigator.geolocation.getCurrentPosition(
-			displayPosition,
-			displayError,
-			{ enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
-		);
-	}
-	else {
-		alert("Geolocation is not supported by this browser");
-	}
-        function displayPosition(position) {
-            var x = position.coords.longitude;
-            var y = position.coords.latitude;
+            if (navigator.geolocation) {
+                var timeoutVal = 10 * 1000 * 1000;
+                navigator.geolocation.getCurrentPosition(
+                        displayPosition,
+                        displayError,
+                        {enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0}
+                );
+            } else {
+                alert("Geolocation is not supported by this browser");
+            }
+            function displayPosition(position) {
+                var x = position.coords.longitude;
+                var y = position.coords.latitude;
 
-            document.getElementById("j_idt7:geoLongitude").value = x;
-            document.getElementById("j_idt7:geoLatitude").value = y;
-            
-        }
-   	function displayError(error) {
-		var errors = {
-			1: 'Permission denied',
-			2: 'Position unavailable',
-			3: 'Request timeout'
-		};
-		alert("Error: " + errors[error.code]);
-	}
-	</script>
+                document.getElementById("j_idt7:geoLongitude").value = x;
+                document.getElementById("j_idt7:geoLatitude").value = y;
+
+            }
+            function displayError(error) {
+                var errors = {
+                    1: 'Permission denied',
+                    2: 'Position unavailable',
+                    3: 'Request timeout'
+                };
+                alert("Error: " + errors[error.code]);
+            }
+        </script>
     </h:head>
     <h:body style="background-color: #F0F8FF">
         <b:container fluid="true" contentDisabled="false">
@@ -44,8 +43,8 @@
                     <b:column span="1" contentDisabled="false"></b:column>
                     <b:column span="10" contentDisabled="false">
                         <b:row contentDisabled="false">
-                            <b:column span="2" contentDisabled="false">
-                                <b:commandButton value="Nuevo evento" look="primary" action="#{UserBean.doCrear()}"/> 
+                            <b:column span="1" contentDisabled="false">
+                                <b:commandButton value="Add Event" look="primary" action="#{UserBean.doCrear()}"/> 
                             </b:column>
                             <b:column span="1" contentDisabled="false">
                                 <b:commandButton value="Show only: " look="info" action="#{listadoEventos.showTags()}"/> 
@@ -57,19 +56,28 @@
                                 </b:selectOneMenu>
                             </b:column>
                             <b:column span="2" contentDisabled="false">
-                                <b:commandButton value="Ordenar por Geolocalizacion" look="success" action="#{listadoEventos.orderByLocation}"/>
+                                <b:commandButton value="Save Preferencies" look="info" action="#"/>
+                            </b:column>
+                            <b:column span="2" contentDisabled="false">
+                                <b:selectMultiMenu includeSelectAllOption="true" value="#">
+                                    <f:selectItems value="#{UserBean.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}"/>
+                                </b:selectMultiMenu>
+                            </b:column>
+                            <b:column span="2" contentDisabled="false">
+                                <b:commandButton value="Order by Location" look="success" action="#{listadoEventos.orderByLocation}"/>
                                 <h:inputHidden id="geoLatitude" value="#{UserBean.latitude}"/>
                                 <h:inputHidden id="geoLongitude" value="#{UserBean.longitude}" />
                             </b:column>
-                            <b:column span="1" contentDisabled="false"></b:column>
-                            <b:column span="3" contentDisabled="false">
-                                <b:commandButton value="Validar Eventos" rendered="#{UserBean.journalist}" look="warning" action="#{listadoEventos.noValidados}"/>
+                            <b:column span="1" contentDisabled="false">
+                                <b:commandButton value="Validate" rendered="#{UserBean.journalist}" look="warning" action="#{listadoEventos.noValidados}"/>
                             </b:column>
                             <b:column span="1" contentDisabled="false">
-                                <b:commandButton value="Log-Out" action="#{UserBean.doLogOut()}"/> 
+                                <b:commandButton value="Log-Out" look="danger" action="#{UserBean.doLogOut()}"/> 
                             </b:column>
 
                         </b:row>
+                        <b:row contentDisabled="false"> <br/> </b:row>
+                        
                         <b:row contentDisabled="false"> <br/> </b:row>
                         <b:dataTable value="#{UserBean.listaEventos}" var="evento" page-length="5" page-length-menu="5,10,20">
                             <f:facet name="header">
@@ -89,16 +97,16 @@
                             <b:dataTableColumn value="#{evento.direccion}"/> 
                             <b:dataTableColumn>
                                 <b:row contentDisabled="false">
-                                    <b:column span="1"></b:column>
                                     <b:column span="3" contentDisabled="false" rendered="#{UserBean.journalist}">
-                                        <b:commandButton value="Editar" look="warning" action="#{deleteAndModifyEvent.doEditar(evento)}" />
+                                        <b:commandButton value="Edit" look="warning" action="#{deleteAndModifyEvent.doEditar(evento)}" />
                                     </b:column>
-                                    <b:column span="3" contentDisabled="false" rendered="#{UserBean.journalist}">
-                                        <b:commandButton value="Borrar" look="danger" action="#{deleteAndModifyEvent.doEliminar(evento)}" />
+                                    <b:column span="4" contentDisabled="false" rendered="#{UserBean.journalist}">
+                                        <b:commandButton value="Delete" look="danger" action="#{deleteAndModifyEvent.doEliminar(evento)}" />
                                     </b:column>
                                     <b:column span="3" contentDisabled="false">
-                                        <b:commandButton value="Ver Evento" look="info" action="#{UserBean.cargarEvento(evento)}"/>
+                                        <b:commandButton value="Open" look="info" action="#{UserBean.cargarEvento(evento)}"/>
                                     </b:column>
+                                    <b:column span="1"></b:column>
                                 </b:row>
                             </b:dataTableColumn> 
                         </b:dataTable>
