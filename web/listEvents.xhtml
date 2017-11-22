@@ -53,7 +53,7 @@
                             <b:column span="2" contentDisabled="false">
                                 <b:selectOneMenu value="#{listadoEventos.tagSelected}">
                                     <f:selectItem itemValue="--" itemLabel="Order by Date" />
-                                    <f:selectItems value="#{listadoEventos.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}" />
+                                    <f:selectItems value="#{UserBean.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}" />
                                 </b:selectOneMenu>
                             </b:column>
                             <b:column span="2" contentDisabled="false">
@@ -71,7 +71,7 @@
 
                         </b:row>
                         <b:row contentDisabled="false"> <br/> </b:row>
-                        <b:dataTable value="#{listadoEventos.listaEventos}" var="evento" page-length="5" page-length-menu="5,10,20">
+                        <b:dataTable value="#{UserBean.listaEventos}" var="evento" page-length="5" page-length-menu="5,10,20">
                             <f:facet name="header">
                                 <tr>
                                     <th>Nombre</th>
