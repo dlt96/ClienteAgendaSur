@@ -27,7 +27,7 @@ import javax.xml.ws.WebServiceRef;
 @RequestScoped
 public class deleteAndModifyEvent {
 
-     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AgendaSur-war/agendaSurService.wsdl")
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AgendaSur-war/agendaSurService.wsdl")
     private AgendaSurService_Service service;
     private String nombre;
     private String descripcion;
@@ -38,23 +38,19 @@ public class deleteAndModifyEvent {
     private float latitud;
     private String selectedTags;
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    
-   
-    
+
     @Inject
     private listadoEventos listado;
-    
+
     @Inject
     private UserBean usuarioSesion;
-    
-    
 
     /**
      * Creates a new instance of deleteAndModifyEvent
      */
     public deleteAndModifyEvent() {
     }
-    
+
     public String getSelectedTags() {
         return selectedTags;
     }
@@ -62,7 +58,7 @@ public class deleteAndModifyEvent {
     public void setSelectedTags(String selectedTags) {
         this.selectedTags = selectedTags;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -126,30 +122,43 @@ public class deleteAndModifyEvent {
     public void setListado(listadoEventos listado) {
         this.listado = listado;
     }
-    
-    
-    
-    public String doEliminar(Evento evento){
+
+    public String updateUserTags() {
+        String[] tags = usuarioSesion.getListaUserTagsSelected().split(",");
+        this.asignarTagsAUsuario(usuarioSesion.getUsuario().getEmail(), Arrays.asList(tags));
+        return null;
+    }
+
+    public String doEliminar(Evento evento) {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.removeEvento(evento);
         usuarioSesion.cargarEventosYTags();
         return null;
     }
-    
-    public String doEditar(Evento evento) throws ParseException{
+
+    public String doEditar(Evento evento) throws ParseException {
+        List<Tag> taglist = findTagsEvento(evento.getId());
+
+        if (taglist.size() > 0) {
+            selectedTags = "";
+            selectedTags = taglist.get(0).getNombre();
+            for (int i = 1; i < taglist.size(); i++) {
+                selectedTags = selectedTags + "," + taglist.get(i).getNombre();
+            }
+        }
         this.usuarioSesion.setEventoAeditar(evento);
-        this.nombre=evento.getNombre();
-        this.descripcion=evento.getDescripcion();
-        this.fechaInicio= (evento.getFechainicio());
-        this.fechaFin=(evento.getFechafin());
+        this.nombre = evento.getNombre();
+        this.descripcion = evento.getDescripcion();
+        this.fechaInicio = (evento.getFechainicio());
+        this.fechaFin = (evento.getFechafin());
         this.direccion = evento.getDireccion();
         this.longitud = evento.getLongitud();
         this.latitud = evento.getLatitud();
         return "editarEvento";
     }
-    
-    public String doGuardar(){
-        String [] tags = selectedTags.split(",");
+
+    public String doGuardar() {
+        String[] tags = selectedTags.split(",");
         //this.getListEvent(tags);
         this.usuarioSesion.getEventoAeditar().setNombre(this.nombre);
         this.usuarioSesion.getEventoAeditar().setDescripcion(this.descripcion);
@@ -163,8 +172,9 @@ public class deleteAndModifyEvent {
         this.asignarTagsAEvento(this.usuarioSesion.getEventoAeditar(), Arrays.asList(tags));
         this.usuarioSesion.cargarEventosYTags();
         return "listEvents";
-        
+
     }
+
     /*
     private void getListEvent(String[] tags){
         this.listaTags.clear();
@@ -172,30 +182,30 @@ public class deleteAndModifyEvent {
             this.listaTags.add(this.findTag(tag));
         }
     }
-    */
-    public String doValidar(){
+     */
+    public String doValidar() {
         this.usuarioSesion.getEvent().setValidado(true);
-        
+
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.editEvento(this.usuarioSesion.getEvent());
         return "listEvents";
     }
-    
+
     private Tag findTag(java.lang.Object id) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findTag(id);
     }
-    
+
     private java.util.List<client.Evento> findAllEvento() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findAllEvento();
     }
-    
-    public String volver(){
+
+    public String volver() {
         return "listEvents";
     }
 
@@ -205,5 +215,19 @@ public class deleteAndModifyEvent {
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.asignarTagsAEvento(arg0, arg1);
     }
-    
+
+    private void asignarTagsAUsuario(java.lang.String arg0, java.util.List<java.lang.String> arg1) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        port.asignarTagsAUsuario(arg0, arg1);
+    }
+
+    private java.util.List<client.Tag> findTagsEvento(int arg0) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findTagsEvento(arg0);
+    }
+
 }
