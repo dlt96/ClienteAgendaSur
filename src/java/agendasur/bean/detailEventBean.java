@@ -96,17 +96,19 @@ public class detailEventBean {
         return null;
     }
 
-    public String validarEvento() {
-        userBean.getEvent().setValidado(true);
-        editEvento(userBean.getEvent());
-        this.sendMail(userBean.getEvent().getId());
+    public String validar() {
+        this.validarEvento(userBean.getEvent().getId());
+        Evento ev = userBean.getEvent();
+        ev.setValidado(true);
+        userBean.setEvent(ev);
         return null;
     }
     
     public String rechazarEvento(){
-        removeEvento(userBean.getEvent());
         this.sendMail(userBean.getEvent().getId());
+        removeEvento(userBean.getEvent());
         userBean.setEvent(null);
+        userBean.setListaEventos(findEventosNoValidados());
         return "listEvents";
     }
 
@@ -147,6 +149,20 @@ public class detailEventBean {
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.sendMail(arg0);
+    }
+
+    private void validarEvento(int arg0) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        port.validarEvento(arg0);
+    }
+
+    private java.util.List<client.Evento> findEventosNoValidados() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findEventosNoValidados();
     }
 
 
