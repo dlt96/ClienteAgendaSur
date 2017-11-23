@@ -10,6 +10,7 @@ import client.Evento;
 import client.Tag;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -169,7 +170,11 @@ public class deleteAndModifyEvent {
         this.usuarioSesion.getEventoAeditar().setLatitud(this.latitud);
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.editEvento(this.usuarioSesion.getEventoAeditar());
-        this.asignarTagsAEvento(this.usuarioSesion.getEventoAeditar(), Arrays.asList(tags));
+        if(tags[0].equals("")){
+            this.asignarTagsAEvento(this.usuarioSesion.getEventoAeditar(), new ArrayList<>());
+        }else{
+            this.asignarTagsAEvento(this.usuarioSesion.getEventoAeditar(), Arrays.asList(tags));
+        }
         this.usuarioSesion.cargarEventosYTags();
         return "listEvents";
 
