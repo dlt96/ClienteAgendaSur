@@ -56,10 +56,10 @@
                                 </b:selectOneMenu>
                             </b:column>
                             <b:column span="2" contentDisabled="false">
-                                <b:commandButton value="Save Preferencies" look="info" action="#"/>
+                                <b:commandButton value="Save Preferencies" look="info" action="#{deleteAndModifyEvent.updateUserTags()}"/>
                             </b:column>
                             <b:column span="2" contentDisabled="false">
-                                <b:selectMultiMenu includeSelectAllOption="true" value="#">
+                                <b:selectMultiMenu value="#{UserBean.listaUserTagsSelected}">
                                     <f:selectItems value="#{UserBean.listaTags}" var="tag" itemValue="#{tag.nombre}" itemLabel="#{tag.nombre}"/>
                                 </b:selectMultiMenu>
                             </b:column>
