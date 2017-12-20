@@ -145,7 +145,7 @@ public class CrearEventoBean {
 
         this.createEvento(evento);
 
-        List<Evento> eventos = findAllEvento();
+        List<Evento> eventos = findEventosNoCaducadosYValidados();
 
         if (selectedTags != null && !"".equals(selectedTags)) {
             String[] tags = selectedTags.split(",");
@@ -198,12 +198,6 @@ public class CrearEventoBean {
         return port.findTag(id);
     }
 
-    private java.util.List<client.Evento> findAllEvento() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        client.AgendaSurService port = service.getAgendaSurServicePort();
-        return port.findAllEvento();
-    }
 
     private void sendMail(int arg0) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
@@ -217,6 +211,13 @@ public class CrearEventoBean {
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         port.asignarTagsAEvento(arg0, arg1);
+    }
+
+    private java.util.List<client.Evento> findEventosNoCaducadosYValidados() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findEventosNoCaducadosYValidados();
     }
 
 }

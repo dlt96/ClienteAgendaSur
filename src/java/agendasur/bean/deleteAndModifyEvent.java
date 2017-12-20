@@ -203,13 +203,6 @@ public class deleteAndModifyEvent {
         return port.findTag(id);
     }
 
-    private java.util.List<client.Evento> findAllEvento() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        client.AgendaSurService port = service.getAgendaSurServicePort();
-        return port.findAllEvento();
-    }
-
     public String volver() {
         return "listEvents";
     }
@@ -233,6 +226,13 @@ public class deleteAndModifyEvent {
         // If the calling of port operations may lead to race condition some synchronization is required.
         client.AgendaSurService port = service.getAgendaSurServicePort();
         return port.findTagsEvento(arg0);
+    }
+
+    private java.util.List<client.Evento> findEventosNoCaducadosYValidados() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        client.AgendaSurService port = service.getAgendaSurServicePort();
+        return port.findEventosNoCaducadosYValidados();
     }
 
 }
